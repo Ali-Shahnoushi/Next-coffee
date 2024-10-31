@@ -1,3 +1,4 @@
+import AOSInit from "@/utils/aos";
 import "./globals.css";
 
 export const metadata = {
@@ -11,7 +12,10 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="fa">
-      <body>{children}</body>
+      <body>
+        <AOSInit />
+        {children}
+      </body>
     </html>
   );
 }
