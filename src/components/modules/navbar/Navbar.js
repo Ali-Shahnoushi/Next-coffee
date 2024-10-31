@@ -1,12 +1,33 @@
-import React from "react";
+"use client";
+
+import React, { useEffect, useState } from "react";
 import styles from "./Nabvar.module.css";
 import Link from "next/link";
 import { IoIosArrowDown } from "react-icons/io";
 import { FaShoppingCart, FaRegHeart } from "react-icons/fa";
 
 function Navbar() {
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const stickNavbarTop = () => {
+      const currentScroll = window.pageYOffset;
+      if (currentScroll > 110) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+
+    window.addEventListener("scroll", stickNavbarTop);
+
+    return () => {
+      window.removeEventListener("scroll", stickNavbarTop);
+    };
+  }, []);
+
   return (
-    <nav className={styles.navbar}>
+    <nav className={isScrolled ? styles.navbar_fixed : styles.navbar}>
       <main>
         <div>
           <Link href="/">
