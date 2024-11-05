@@ -4,7 +4,7 @@ import Sms from "./Sms";
 import swal from "sweetalert";
 import toast from "react-hot-toast";
 import { validateEmail, validatePassword, validatePhone } from "@/utils/auth";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 const Register = ({ showloginForm }) => {
   const [isRegisterWithPass, setIsRegisterWithPass] = useState(false);

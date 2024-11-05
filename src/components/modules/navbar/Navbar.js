@@ -62,6 +62,7 @@ function Navbar({ isLogin }) {
             <div className={styles.dropdown}>
               <Link href="/p-user">
                 <IoIosArrowDown className={styles.dropdown_icons} />
+                {/* عزیز {isLogin.name} !سلام */}
                 حساب کاربری
               </Link>
               <div className={styles.dropdown_content}>

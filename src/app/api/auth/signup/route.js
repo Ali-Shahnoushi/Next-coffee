@@ -11,7 +11,7 @@ import { roles } from "@/utils/constants";
 
 export async function POST(req) {
   try {
-    await connectToDB();
+    connectToDB();
 
     const body = await req.json();
     const { name, email, phone, password } = body;
@@ -56,7 +56,7 @@ export async function POST(req) {
     }
 
     const hashedPassword = await hashPassword(password);
-    const accessToken = generateAccessToken({ name });
+    const accessToken = generateAccessToken({ email });
 
     const users = await UserModel.find({});
 
