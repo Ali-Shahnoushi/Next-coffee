@@ -1,6 +1,7 @@
 import AOSInit from "@/utils/aos";
 import "./globals.css";
 import ScrollToTop from "@/utils/SctollToTop";
+import { Toaster } from "react-hot-toast";
 
 export const metadata = {
   title:
@@ -17,6 +18,7 @@ export default function RootLayout({ children }) {
         <AOSInit />
         {children}
         <ScrollToTop />
+        <Toaster />
       </body>
     </html>
   );
