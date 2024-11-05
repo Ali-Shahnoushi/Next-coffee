@@ -4,10 +4,12 @@ import Sms from "./Sms";
 import swal from "sweetalert";
 import toast from "react-hot-toast";
 import { validateEmail, validatePassword, validatePhone } from "@/utils/auth";
+import { useRouter } from "next/router";
 
 const Register = ({ showloginForm }) => {
   const [isRegisterWithPass, setIsRegisterWithPass] = useState(false);
   const [isRegisterWithOTP, setIsRegisterWithOTP] = useState(false);
+  const router = useRouter();
 
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
@@ -66,7 +68,7 @@ const Register = ({ showloginForm }) => {
         title: "ثبت نام با موفقیت انجام شد",
         icon: "success",
         buttons: "ورود به پنل کاربری",
-      });
+      }).then(router.push("/"));
     }
 
     if (res.status === 422) {

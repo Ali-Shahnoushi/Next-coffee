@@ -2,13 +2,14 @@ import React, { useState } from "react";
 import styles from "./login.module.css";
 import Link from "next/link";
 import Sms from "./Sms";
+import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { validateEmail } from "@/utils/auth";
 const Login = ({ showRegisterForm }) => {
   const [isLoginWithOPT, setIsLoginWithOPT] = useState(false);
   const [phoneOrEmail, setPhoneOrEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  const router = useRouter();
   const hideOPTform = () => setIsLoginWithOPT(false);
 
   const loginWithPassword = async () => {
@@ -38,6 +39,7 @@ const Login = ({ showRegisterForm }) => {
       setPassword("");
       setPhoneOrEmail("");
       toast.success("با موفقیت وارد شدید");
+      router.push("/");
     }
     if ([422, 419, 401].includes(res.status))
       toast.error("ایمیل یا رمزعبور صحیح نمی‌باشد");
