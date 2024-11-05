@@ -34,7 +34,11 @@ const Login = ({ showRegisterForm }) => {
 
     console.log(res);
 
-    if (res.status === 200) toast.success("با موفقیت وارد شدید");
+    if (res.status === 200) {
+      setPassword("");
+      setPhoneOrEmail("");
+      toast.success("با موفقیت وارد شدید");
+    }
     if ([422, 419, 401].includes(res.status))
       toast.error("ایمیل یا رمزعبور صحیح نمی‌باشد");
   };
