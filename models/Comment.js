@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+const { default: mongoose } = require("mongoose");
 require("./Product");
 
 const schema = new mongoose.Schema({
@@ -20,12 +20,16 @@ const schema = new mongoose.Schema({
     min: 0,
     max: 5,
   },
+  isAccepted: {
+    type: Boolean,
+    default: false,
+  },
   date: {
     type: Date,
     immutable: true,
     default: () => Date.now(),
   },
-  product: {
+  productID: {
     type: mongoose.Types.ObjectId,
     ref: "Product",
   },

@@ -1,4 +1,6 @@
-import mongoose from "mongoose";
+const { default: mongoose } = require("mongoose");
+
+// import mongoose from "mongoose";
 require("./Comment");
 
 const schema = new mongoose.Schema({
@@ -32,7 +34,7 @@ const schema = new mongoose.Schema({
   },
   score: {
     type: Number,
-    required: true,
+    default: 5,
   },
   comments: {
     type: [{ type: mongoose.Types.ObjectId, ref: "Comment" }],

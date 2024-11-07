@@ -1,4 +1,4 @@
-import { FaFacebookF, FaStar, FaTwitter } from "react-icons/fa";
+import { FaFacebookF, FaRegStar, FaStar, FaTwitter } from "react-icons/fa";
 import { IoCheckmark } from "react-icons/io5";
 import { CiHeart } from "react-icons/ci";
 import { TbSwitch3 } from "react-icons/tb";
@@ -6,35 +6,34 @@ import { FaTelegram, FaLinkedinIn, FaPinterest } from "react-icons/fa";
 import styles from "./details.module.css";
 import Breadcrumb from "./Breadcrumb";
 
-const Details = () => {
+const Details = ({ product }) => {
   return (
     <main style={{ width: "63%" }}>
-      <Breadcrumb
-        title={
-          "کپسول قهوه SETpresso سازگار با دستگاه نسپرسو ( GOLD ) ده -10- عددی"
-        }
-      />
-      <h2>
-        کپسول قهوه SETpresso سازگار با دستگاه نسپرسو ( GOLD ) ده -10- عددی
-      </h2>
+      <Breadcrumb title={product.title} />
+      <h2>{product.title}</h2>
 
       <div className={styles.rating}>
-        <div>
-          <FaStar />
-          <FaStar />
-          <FaStar />
-          <FaStar />
-          <FaStar />
+        <div className={styles.stars}>
+          {Array(product.score)
+            .fill(0)
+            .map((i, id) => (
+              <FaStar key={id} />
+            ))}
+          {Array(5 - +product.score)
+            .fill(0)
+            .map((i, id) => (
+              <FaRegStar key={id} />
+            ))}
         </div>
-        <p>(دیدگاه 7 کاربر)</p>
+        <p>
+          (دیدگاه{" "}
+          {product.comments.filter((comment) => comment.isAccepted).length}{" "}
+          کاربر)
+        </p>
       </div>
 
-      <p className={styles.price}>205,000 تومان</p>
-      <span className={styles.description}>
-        کپسول قهوه ست مدل Gold سازگار با دستگاههای کپسولی نسپرسو می باشد . ترکیب
-        این قهوه عربیکا بوده و با برشته کاری متوسط درجاتی از اسیدیته به همراه تن
-        واری متوسط , و برای ترکیب با شیر بسیار عالی می باشد.
-      </span>
+      <p className={styles.price}>{product.price.toLocaleString()} تومان</p>
+      <span className={styles.description}>{product.shortDescription}</span>
 
       <hr />
 
@@ -64,14 +63,9 @@ const Details = () => {
       <hr />
 
       <div className={styles.details}>
-        <strong>شناسه محصول: GOLD Nespresso Compatible capsule</strong>
+        <strong>شناسه محصول: {product._id}</strong>
         <p>
-          {" "}
-          <strong>دسته:</strong> Coffee Capsule, کپسول قهوه, همه موارد
-        </p>
-        <p>
-          <strong>برچسب:</strong> کپسول قهوه،کپسول قهوه ست پرسو،کپسول قهوه
-          ایرانی،کپسول قهوه نسپرسو ایرانی،قهوه ست ، Setpresso،Gold Setpresso
+          <strong>برچسب:</strong> {product.tags.join(" ,")}
         </p>
       </div>
 

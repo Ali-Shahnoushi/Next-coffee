@@ -5,7 +5,9 @@ import "swiper/css/navigation";
 import { Navigation } from "swiper/modules";
 import ProductCard from "@/components/modules/product/ProductCard";
 
-const MoreProducts = () => {
+const MoreProducts = ({ relatedProducts }) => {
+  console.log(relatedProducts);
+
   return (
     <div data-aos="fade-right">
       <section>
@@ -26,32 +28,13 @@ const MoreProducts = () => {
         rewind={true}
         navigation={true}
         modules={[Navigation]}
-        className="mySwiper "
+        className="mySwiper"
       >
-        <SwiperSlide>
-          <ProductCard />
-        </SwiperSlide>
-        <SwiperSlide>
-          <ProductCard />
-        </SwiperSlide>
-        <SwiperSlide>
-          <ProductCard />
-        </SwiperSlide>
-        <SwiperSlide>
-          <ProductCard />
-        </SwiperSlide>
-        <SwiperSlide>
-          <ProductCard />
-        </SwiperSlide>
-        <SwiperSlide>
-          <ProductCard />
-        </SwiperSlide>
-        <SwiperSlide>
-          <ProductCard />
-        </SwiperSlide>
-        <SwiperSlide>
-          <ProductCard />
-        </SwiperSlide>
+        {relatedProducts.map((product) => (
+          <SwiperSlide key={product._id}>
+            <ProductCard {...product} />
+          </SwiperSlide>
+        ))}{" "}
       </Swiper>
     </div>
   );
