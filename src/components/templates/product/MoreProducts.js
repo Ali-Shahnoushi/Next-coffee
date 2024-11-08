@@ -6,8 +6,6 @@ import { Navigation } from "swiper/modules";
 import ProductCard from "@/components/modules/product/ProductCard";
 
 const MoreProducts = ({ relatedProducts }) => {
-  console.log(relatedProducts);
-
   return (
     <div data-aos="fade-right">
       <section>

@@ -9,10 +9,7 @@ import { useState } from "react";
 
 const Gallery = () => {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
-  const images = [
-    "https://set-coffee.com/wp-content/uploads/2020/12/Gold-DG-700x700.jpg",
-    "https://set-coffee.com/wp-content/uploads/2020/12/Gold-box-DG--150x150.jpg",
-  ];
+  const images = ["/images/gallery-1.jpg", "/images/gallery-2.jpg"];
 
   return (
     <section style={{ width: "36%" }}>
@@ -27,8 +24,8 @@ const Gallery = () => {
         modules={[FreeMode, Navigation, Thumbs]}
         className="mySwiper2 gallery-slider"
       >
-        {images.map((img, i) => (
-          <SwiperSlide key={i}>
+        {images.map((img, index) => (
+          <SwiperSlide key={index}>
             <img src={img} />
           </SwiperSlide>
         ))}
@@ -43,8 +40,8 @@ const Gallery = () => {
         modules={[FreeMode, Navigation, Thumbs]}
         className="gallery-slider-2"
       >
-        {images.map((img) => (
-          <SwiperSlide key={Math.random()}>
+        {images.map((img, index) => (
+          <SwiperSlide key={index}>
             <img src={img} />
           </SwiperSlide>
         ))}

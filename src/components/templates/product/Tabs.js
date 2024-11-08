@@ -14,21 +14,21 @@ const Tabs = ({ product }) => {
         type="radio"
         id="description"
         name="tab-control"
-        checked={tab == "description" && "checked"}
+        checked={tab == "description" ? "checked" : ""}
       />
       <input
         onChange={() => setTab("moreInfoes")}
         type="radio"
         id="moreInfoes"
         name="tab-control"
-        checked={tab == "moreInfoes" && "checked"}
+        checked={tab == "moreInfoes" ? "checked" : ""}
       />
       <input
         onChange={() => setTab("comments")}
         type="radio"
         id="comments"
         name="tab-control"
-        checked={tab == "comments" && "checked"}
+        checked={tab == "comments" ? "checked" : ""}
       />
       <ul>
         <li title="Features">

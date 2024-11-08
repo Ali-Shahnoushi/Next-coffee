@@ -27,10 +27,7 @@ const Card = () => {
         </Link>
         <div>
           <p>نویسنده</p>
-          <img
-            src="https://secure.gravatar.com/avatar/665a1a4dc7cc052eaa938253ef413a78?s=32&d=mm&r=g"
-            alt=""
-          />
+          <img src="/images/default-user.png" alt="" />
           <p>Mohebi</p>
           <div>
             <MdOutlineSms />

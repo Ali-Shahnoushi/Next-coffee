@@ -3,7 +3,7 @@ import styles from "./product.module.css";
 import { FaRegStar, FaStar } from "react-icons/fa";
 import { CiSearch, CiHeart } from "react-icons/ci";
 
-const ProductCard = ({ title, price, score }) => {
+const ProductCard = ({ title = "قهوه", price = 0, score = 5 }) => {
   return (
     <div className={styles.card}>
       <div className={styles.details_container}>
@@ -35,7 +35,9 @@ const ProductCard = ({ title, price, score }) => {
               <FaRegStar key={id} />
             ))}
         </div>
-        <span>{price.toLocaleString()} تومان</span>
+        <span>
+          {price === 0 ? "رایگان" : price?.toLocaleString() + "تومان"}{" "}
+        </span>
       </div>
     </div>
   );
