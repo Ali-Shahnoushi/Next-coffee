@@ -28,12 +28,6 @@ export async function POST(req) {
       );
     }
 
-    await WishlistModel.create({ user, product });
-
-    return Response.json(
-      { message: "علاقه مندی با موفقیت افزوده شد" },
-      { status: 201 }
-    );
   } catch (error) {
     console.log(error);
 

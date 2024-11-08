@@ -67,7 +67,7 @@ export default function AddToWishlist({ productID }) {
     <div onClick={addToWishlist}>
       {wishes?.some((wish) => wish.product === productID) ? (
         <>
-          <FaHeart color="#f44" cursor="pointer" size={24}/>
+          <FaHeart color="#f44" cursor="pointer" size={26}/>
         </>
       ) : (
         <>

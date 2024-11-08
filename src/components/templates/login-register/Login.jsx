@@ -33,8 +33,6 @@ const Login = ({ showRegisterForm }) => {
       body: JSON.stringify(user),
     });
 
-    console.log(res);
-
     if (res.status === 200) {
       setPassword("");
       setPhoneOrEmail("");

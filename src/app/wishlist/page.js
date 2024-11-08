@@ -19,7 +19,6 @@ const page = async () => {
       .populate("product", "title price score")
       .lean();
   }
-  console.log(wishes);
 
   return (
     <>
