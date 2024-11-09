@@ -15,6 +15,8 @@ const Details = ({ product }) => {
       <div className={styles.rating}>
         <div className={styles.stars}>
           {Array(product.score)
+
+          
             .fill(0)
             .map((i, id) => (
               <FaStar key={id} />
