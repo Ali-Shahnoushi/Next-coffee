@@ -17,7 +17,7 @@ const Topbar = () => {
             <p>شاهین مشکل گشا</p>
             <span>ادمین</span>
           </div>
-          <img src="/images/shahin.jpg" alt="" />
+          <img src="images/admin.jpg" alt="" />
         </div>
         <section>
           <div className={styles.searchBox}>

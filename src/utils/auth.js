@@ -1,8 +1,5 @@
 import { hash, compare } from "bcryptjs";
 import { sign, verify } from "jsonwebtoken";
-import UserModel from "@/models/User";
-import { cookies } from "next/dist/client/components/headers";
-import { connectToDB } from "@/configs/db";
 
 const hashPassword = async (password) => {
   const hashedPassword = await hash(password, 12);
@@ -61,25 +58,9 @@ const validatePassword = (password) => {
   return pattern.test(password);
 };
 
-const authUser = async () => {
-  connectToDB();
-  const token = cookies().get("token");
-
-  let user = null;
-  if (token) {
-    const tokenPayload = verifyToken(token.value);
-    if (tokenPayload) {
-      user = await UserModel.findOne({ email: tokenPayload.email });
-    }
-  }
-
-  return user;
-};
-
 export {
   hashPassword,
   verifyPassword,
-  authUser,
   generateAccessToken,
   generateRefreshToken,
   verifyToken,
