@@ -15,9 +15,9 @@ const Topbar = () => {
         <div className={styles.profile}>
           <div>
             <p>شاهین مشکل گشا</p>
-            <span>ادمین</span>
+            <span>علی</span>
           </div>
-          <img src="images/admin.jpg" alt="" />
+          <img src="/images/admin.jpg" alt="" />
         </div>
         <section>
           <div className={styles.searchBox}>

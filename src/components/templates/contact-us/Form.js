@@ -44,7 +44,6 @@ const Form = () => {
         timer: 1500,
       });
     }
-    console.log("Res ->", res);
   };
 
   return (

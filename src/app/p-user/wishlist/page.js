@@ -13,7 +13,6 @@ const page = async () => {
   const wishlist = await WishlistModel.find({ user: user._id }).populate(
     "product"
   );
-  console.log(wishlist);
 
   return (
     <UserPanelLayout>
@@ -22,13 +21,14 @@ const page = async () => {
           <span>علاقه مندی ها</span>
         </h1>
         <div className={styles.container}>
-          {wishlist.length &&
+          {wishlist.length > 0 &&
             wishlist.map((wish) => (
               <Product
-                key={wish._id}
-                name={wish.product.name}
+                key={wish.product._id}
+                title={wish.product.title}
                 price={wish.product.price}
                 score={wish.product.score}
+                productID={wish.product._id}
               />
             ))}
         </div>
