@@ -30,3 +30,21 @@ export async function POST(req) {
     return Response.json({ message: err }, { status: 500 });
   }
 }
+
+// export async function DELETE(req) {
+//   try {
+//     connectToDB();
+//     const body = await req.json();
+//     const { id } = body;
+
+//     // todo validation
+
+//     await UserModel.findOneAndDelete({ _id: id });
+//     return Response.json({ message: "user deleted successfuly!" });
+//   } catch (error) {
+//     console.log(error);
+
+//     return Response.json({ message: "asd" }, { status: 500 });
+//   }
+// }
+
