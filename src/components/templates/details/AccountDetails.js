@@ -18,7 +18,6 @@ function AccountDetails() {
       setName(data.user.name);
       // setEmail(data.email);
       setPhone(data.user.phone);
-      console.log(data);
     };
     getUser();
   }, []);

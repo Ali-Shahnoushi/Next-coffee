@@ -1,7 +1,7 @@
 import Link from "next/link";
 import styles from "./ticket.module.css";
 
-const Ticket = ({ title, _id, department, hasAnswer, createdAt }) => {
+const Ticket = ({ _id, title, createdAt, department, hasAnswer }) => {
   return (
     <Link href={`/p-user/tickets/answer/${_id}`} className={styles.ticket}>
       <div>
@@ -10,7 +10,7 @@ const Ticket = ({ title, _id, department, hasAnswer, createdAt }) => {
       </div>
       <div>
         <p>{new Date(createdAt).toLocaleDateString("fa-IR")}</p>
-        <p className={styles.no_answer}>
+        <p className={hasAnswer ? styles.answer : styles.no_answer}>
           {hasAnswer ? "پاسخ داده شده" : "پاسخ داده نشده"}
         </p>
         {/* answer */}
