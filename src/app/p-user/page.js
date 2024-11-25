@@ -11,9 +11,7 @@ import wishlistModel from "@/models/Wishlist";
 
 const page = async () => {
   const user = await authUser();
-  if (!user) {
-    redirect("/login-register");
-  }
+
   const tickets = await ticketModel
     .find({ user: user._id })
     .limit(3)
