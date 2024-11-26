@@ -8,7 +8,7 @@ import { connectToDB } from "@/configs/db";
 const page = async () => {
   connectToDB();
   const user = await authUser();
-  const tickets = await TicketModel.find({ user: user._id })
+  const tickets = await TicketModel.find({ user: user._id, isAnswer: false })
     .populate("department", "title")
     .sort({ createdAt: "desc" })
     .lean();

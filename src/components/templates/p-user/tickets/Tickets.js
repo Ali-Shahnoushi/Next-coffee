@@ -6,6 +6,8 @@ import Link from "next/link";
 import Ticket from "./Ticket";
 
 function Tickets({ tickets }) {
+
+
   return (
     <main className={styles.container}>
       <h1 className={styles.title}>

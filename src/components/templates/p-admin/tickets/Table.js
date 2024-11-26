@@ -2,16 +2,47 @@
 
 import React from "react";
 import styles from "./table.module.css";
-import { useRouter } from "next/navigation";
 import swal from "sweetalert";
 export default function DataTable({ tickets, title }) {
-  const router = useRouter();
 
   const showTicketMessage = (body, username) => {
     swal({
       title: username,
       text: body,
       buttons: "خواندم",
+    });
+  };
+
+  const asnwerTicket = (ticket) => {
+    swal({
+      title: "پاسخ خود را وارد کنید",
+      content: "input",
+      buttons: "ثبت پاسخ",
+    }).then(async (result) => {
+      if (result) {
+        const answer = {
+          ...ticket,
+          body: result,
+          ticketID: ticket._id,
+        };
+
+        const res = await fetch("/api/tickets/answer", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(answer),
+        });
+
+        if (res.status === 201) {
+          swal({
+            icon: "success",
+            text: "پاسخ با موفقیت ثبت شد",
+            buttons: [""],
+            timer: 1500,
+          });
+        }
+      }
     });
   };
 
@@ -31,7 +62,6 @@ export default function DataTable({ tickets, title }) {
               <th>عنوان</th>
               <th>دپارتمان</th>
               <th>مشاهده</th>
-              <th>حذف</th>
               <th>پاسخ</th>
               <th>بن</th>
             </tr>
@@ -55,13 +85,14 @@ export default function DataTable({ tickets, title }) {
                   </button>
                 </td>
                 <td>
-                  <button type="button" className={styles.edit_btn}>
+                  <button
+                    onClick={() => {
+                      asnwerTicket(ticket);
+                    }}
+                    type="button"
+                    className={styles.edit_btn}
+                  >
                     پاسخ
-                  </button>
-                </td>
-                <td>
-                  <button type="button" className={styles.delete_btn}>
-                    حذف
                   </button>
                 </td>
                 <td>

@@ -18,7 +18,7 @@ export async function POST(req) {
       productID,
     });
 
-    const updateProduct = await ProductModel.findOneAndUpdate(
+    await ProductModel.findOneAndUpdate(
       { _id: productID },
       {
         $push: {
@@ -44,7 +44,7 @@ export async function GET() {
   try {
     connectToDB();
     const comments = await CommentModel.find({}, "-__v");
-    await CommentModel.findOneAndUpdate({}, { isAccepted: true });
+    // await CommentModel.findOneAndUpdate({}, { isAccepted: true });
     return Response.json(comments);
   } catch (error) {
     console.log(error);

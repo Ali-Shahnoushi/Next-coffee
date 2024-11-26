@@ -13,7 +13,9 @@ const page = async ({ params }) => {
     "name"
   );
 
-  const answerTicket = await TicketModel.findOne({ mainTicket: ticket._id });
+  const answerTicket = await TicketModel.findOne({
+    mainTicket: ticket._id,
+  }).populate("user");
 
   return (
     <Layout>
