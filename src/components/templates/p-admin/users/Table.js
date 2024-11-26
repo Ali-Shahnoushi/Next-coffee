@@ -3,7 +3,7 @@
 import React from "react";
 import styles from "./table.module.css";
 import { useRouter } from "next/navigation";
-export default function DataTable({ users, title }) {
+export default function DataTable({ users, title, bannedUsers }) {
   const router = useRouter();
 
   const changeRole = async (userID) => {
@@ -60,6 +60,39 @@ export default function DataTable({ users, title }) {
     });
   };
 
+  const banUser = async (email, phone) => {
+    //todo validation
+
+    swal({
+      icon: "warning",
+      text: "آیا از بن کردن این کاربر اطمینان دارید؟",
+      buttons: ["نه", "آره"],
+    }).then(async (result) => {
+      if (result) {
+        const res = await fetch("/api/user/ban", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email, phone }),
+        });
+        const data = await res.json();
+        console.log(data);
+
+        if (res.status === 200) {
+          swal({
+            icon: "success",
+            text: "کاربر با موفقیت بن شد",
+            buttons: [""],
+            timer: 1500,
+          }).then(() => {
+            router.refresh();
+          });
+        }
+      }
+    });
+  };
+
   return (
     <div>
       <div>
@@ -83,7 +116,16 @@ export default function DataTable({ users, title }) {
           </thead>
           <tbody>
             {users.map((user, index) => (
-              <tr key={user._id}>
+              <tr
+                style={
+                  bannedUsers.some(
+                    (bannedUser) => bannedUser.phone === user.phone
+                  )
+                    ? { backgroundColor: "grey" }
+                    : {}
+                }
+                key={user._id}
+              >
                 <td>{index + 1}</td>
                 <td>{user.name}</td>
                 <td>{user.email ? user.email : "ایمیل یافت نشد"}</td>
@@ -116,7 +158,13 @@ export default function DataTable({ users, title }) {
                   </button>
                 </td>
                 <td>
-                  <button type="button" className={styles.delete_btn}>
+                  <button
+                    onClick={() => {
+                      banUser(user.email, user.phone);
+                    }}
+                    type="button"
+                    className={styles.delete_btn}
+                  >
                     بن
                   </button>
                 </td>

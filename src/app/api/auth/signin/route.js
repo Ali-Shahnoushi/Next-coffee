@@ -8,6 +8,8 @@ const {
   generateRefreshToken,
 } = require("@/utils/auth");
 import UserModel from "@/models/User";
+import bannedModel from "@/models/Banned";
+import { cookies } from "next/headers";
 
 export async function POST(req) {
   try {
@@ -47,6 +49,16 @@ export async function POST(req) {
 
     const accessToken = generateAccessToken({ email });
     const refreshToken = generateRefreshToken({ email });
+
+    const isUserBanned = await bannedModel.findOne({
+      $or: [{ email }, { phone }],
+    });
+
+    if (isUserBanned) {
+      cookies().delete("token");
+
+      return Response.json({ message: "user is banned !" }, { status: 403 });
+    }
 
     await UserModel.findOneAndUpdate({ email }, { $set: { refreshToken } });
 

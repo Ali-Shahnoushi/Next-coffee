@@ -39,8 +39,11 @@ const Login = ({ showRegisterForm }) => {
       toast.success("با موفقیت وارد شدید");
       router.push("/");
     }
-    if ([422, 419, 401].includes(res.status))
+    if ([422, 419, 401].includes(res.status)) {
       toast.error("ایمیل یا رمزعبور صحیح نمی‌باشد");
+    } else if (res.status === 403) {
+      toast.error("حساب این کاربر مسدود شده است");
+    }
   };
 
   const loginWithPhone = () => {};
