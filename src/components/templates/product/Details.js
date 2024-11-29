@@ -1,3 +1,5 @@
+"use client";
+
 import { FaFacebookF, FaRegStar, FaStar, FaTwitter } from "react-icons/fa";
 import { IoCheckmark } from "react-icons/io5";
 import { TbSwitch3 } from "react-icons/tb";
@@ -5,8 +7,72 @@ import { FaTelegram, FaLinkedinIn, FaPinterest } from "react-icons/fa";
 import styles from "./details.module.css";
 import Breadcrumb from "./Breadcrumb";
 import AddToWishlist from "./AddToWishlist";
+import { useState } from "react";
 
 const Details = ({ product }) => {
+  const [count, setCount] = useState(1);
+
+  const addToCart = () => {
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    if (cart.length) {
+      const isExistInCart = cart.some((item) => item.id === product._id);
+
+      if (isExistInCart) {
+        cart.forEach((item) => {
+          if (item.id === product._id) {
+            item.count += count;
+          }
+        });
+
+        localStorage.setItem("cart", JSON.stringify(cart));
+
+        swal({
+          icon: "success",
+          text: "محصول با موفقیت به سبد خرید اضافه شد",
+          timer: 1500,
+          buttons: [""],
+        });
+      } else {
+        const cartItem = {
+          id: product._id,
+          title: product.title,
+          price: product.price,
+          count,
+        };
+
+        cart.push(cartItem);
+
+        localStorage.setItem("cart", JSON.stringify(cart));
+
+        swal({
+          icon: "success",
+          text: "محصول با موفقیت به سبد خرید اضافه شد",
+          timer: 1500,
+          buttons: [""],
+        });
+      }
+    } else {
+      const cartItem = {
+        id: product._id,
+        title: product.title,
+        price: product.price,
+        count,
+      };
+
+      cart.push(cartItem);
+
+      localStorage.setItem("cart", JSON.stringify(cart));
+
+      swal({
+        icon: "success",
+        text: "محصول با موفقیت به سبد خرید اضافه شد",
+        timer: 1500,
+        buttons: [""],
+      });
+    }
+  };
+
   return (
     <main style={{ width: "63%" }}>
       <Breadcrumb title={product.title} />
@@ -15,8 +81,6 @@ const Details = ({ product }) => {
       <div className={styles.rating}>
         <div className={styles.stars}>
           {Array(product.score)
-
-          
             .fill(0)
             .map((i, id) => (
               <FaStar key={id} />
@@ -45,9 +109,23 @@ const Details = ({ product }) => {
       </div>
 
       <div className={styles.cart}>
-        <button>افزودن به سبد خرید</button>
+        <button onClick={addToCart}>افزودن به سبد خرید</button>
         <div>
-          <span>-</span>1<span>+</span>
+          <span
+            onClick={() => {
+              setCount((p) => p - 1);
+            }}
+          >
+            -
+          </span>
+          {count}
+          <span
+            onClick={() => {
+              setCount((p) => p + 1);
+            }}
+          >
+            +
+          </span>
         </div>
       </div>
 
