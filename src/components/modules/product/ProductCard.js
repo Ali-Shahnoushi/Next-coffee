@@ -3,11 +3,17 @@ import styles from "./product.module.css";
 import { FaRegStar, FaStar } from "react-icons/fa";
 import { CiSearch, CiHeart } from "react-icons/ci";
 
-const ProductCard = ({ title = "قهوه", price = 0, score = 5 }) => {
+const ProductCard = ({ title, price, score, img }) => {
   return (
     <div className={styles.card}>
       <div className={styles.details_container}>
-        <img src="/images/giorno-main-300x300.webp" alt="" />
+        <img
+          src={
+            img ||
+            "https://set-coffee.com/wp-content/uploads/2021/10/041-430x430.png"
+          }
+          alt=""
+        />{" "}
         <div className={styles.icons}>
           <Link href="/">
             <CiSearch />

@@ -1,20 +1,27 @@
 const { connectToDB } = require("@/configs/db");
 import ProductModel from "@/models/Product";
+import { writeFile } from "fs/promises";
+import path from "path";
 
 export async function POST(req) {
   try {
     connectToDB();
-    const body = await req.json();
-    const {
-      title,
-      price,
-      shortDescription,
-      description,
-      weight,
-      suitableFor,
-      smell,
-      tags,
-    } = body;
+    const formData = await req.formData();
+    const title = formData.get("title");
+    const price = formData.get("price");
+    const shortDescription = formData.get("shortDescription");
+    const description = formData.get("description");
+    const weight = formData.get("weight");
+    const suitableFor = formData.get("suitableFor");
+    const smell = formData.get("smell");
+    const tags = formData.get("tags");
+    const img = formData.get("img");
+
+    const buffer = Buffer.from(await img.arrayBuffer());
+    const filename = String(Date.now()) + img.name;
+    const imgPath = path.join(process.cwd(), "public/uploads/" + filename);
+
+    await writeFile(imgPath, buffer);
 
     const product = await ProductModel.create({
       title,
@@ -25,18 +32,17 @@ export async function POST(req) {
       suitableFor,
       smell,
       tags,
+      img: `http://localhost:3000/uploads/${filename}`,
     });
 
     return Response.json(
-      { message: "محصول با موفقیت ساخته شد", data: product },
+      { message: "Product created successfully :))", data: product },
       { status: 201 }
     );
-  } catch (error) {
-    console.log(error);
-    return Response.json(
-      { message: "server error in post a product", error },
-      { status: 500 }
-    );
+  } catch (err) {
+    console.log(err);
+
+    return Response.json({ message: err }, { status: 500 });
   }
 }
 

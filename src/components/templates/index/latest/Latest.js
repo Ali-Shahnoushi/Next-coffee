@@ -3,7 +3,7 @@ import styles from "./latest.module.css";
 import { FaChevronLeft } from "react-icons/fa6";
 import ProductCard from "@/components/modules/product/ProductCard";
 
-const Latest = () => {
+const Latest = ({ products }) => {
   return (
     <div className={styles.container}>
       <section className={styles.title}>
@@ -15,15 +15,10 @@ const Latest = () => {
           مشاهده همه <FaChevronLeft />{" "}
         </Link>
       </section>
-      <main data-aos="fade-up"  className={styles.products}>
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
+      <main data-aos="fade-up" className={styles.products}>
+        {products.map((product) => (
+          <ProductCard key={product._id} {...product} />
+        ))}
       </main>
     </div>
   );
