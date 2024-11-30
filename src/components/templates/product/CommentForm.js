@@ -1,5 +1,5 @@
 import styles from "./commentForm.module.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaStar } from "react-icons/fa";
 import swal from "sweetalert";
 
@@ -8,8 +8,23 @@ const CommentForm = ({ productId }) => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [score, setScore] = useState(1);
+  const [isSaveUserData, setIsSaveUserData] = useState(false);
+
+  useEffect(() => {
+    const useraInfo = JSON.parse(localStorage.getItem("user-info"));
+    if (useraInfo) {
+      setUsername(useraInfo.username);
+      setEmail(useraInfo.email);
+    }
+  }, []);
 
   const sendComment = async () => {
+    if (isSaveUserData) {
+      const userInfo = { username, email };
+
+      localStorage.setItem("user-info", JSON.stringify(userInfo));
+    }
+
     const comment = { productID: productId, username, body, score, email };
 
     const res = await fetch("/api/comments", {
@@ -25,7 +40,7 @@ const CommentForm = ({ productId }) => {
         timer: 1500,
         buttons: ["بسیارخب"],
         icon: "success",
-        title: "نظر شما با موفقیت ثبت شد",
+        text: "نظر ثبت شد و پس از بررسی نمایش داده می‌شود",
       });
       setBody("");
       setUsername("");
@@ -115,7 +130,13 @@ const CommentForm = ({ productId }) => {
         </div>
       </div>
       <div className={styles.checkbox}>
-        <input type="checkbox" name="" id="" />
+        <input
+          type="checkbox"
+          value={isSaveUserData}
+          onChange={() => {
+            setIsSaveUserData((prev) => !prev);
+          }}
+        />
         <p>
           {" "}
           ذخیره نام، ایمیل و وبسایت من در مرورگر برای زمانی که دوباره دیدگاهی
