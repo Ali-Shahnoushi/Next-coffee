@@ -3,49 +3,54 @@ import styles from "./product.module.css";
 import { FaRegStar, FaStar } from "react-icons/fa";
 import { CiSearch, CiHeart } from "react-icons/ci";
 
-const ProductCard = ({ title, price, score, img }) => {
-  return (
-    <div className={styles.card}>
-      <div className={styles.details_container}>
-        <img
-          src={
-            img ||
-            "https://set-coffee.com/wp-content/uploads/2021/10/041-430x430.png"
-          }
-          alt=""
-        />{" "}
-        <div className={styles.icons}>
-          <Link href="/">
-            <CiSearch />
-            <p className={styles.tooltip}>مشاهده سریع</p>
-          </Link>
-          <div>
-            <CiHeart />
-            <p className={styles.tooltip}>افزودن به علاقه مندی ها </p>
-          </div>
-        </div>
-        <button>افزودن به سبد خرید</button>
-      </div>
+const ProductCard = ({ _id, title, price, score, img }) => {
+  const validScore =
+    typeof score === "number" && score >= 1 && score <= 5 ? score : 1;
 
-      <div className={styles.details}>
-        <Link href={"/"}>{title}</Link>
-        <div>
-          {Array(score)
-            .fill(0)
-            .map((i, id) => (
-              <FaStar key={id} />
-            ))}
-          {Array(5 - +score)
-            .fill(0)
-            .map((i, id) => (
-              <FaRegStar key={id} />
-            ))}
+  return (
+    <Link href={`/product/${_id}`}>
+      <div className={styles.card}>
+        <div className={styles.details_container}>
+          <img
+            src={
+              img ||
+              "https://set-coffee.com/wp-content/uploads/2021/10/041-430x430.png"
+            }
+            alt=""
+          />{" "}
+          <div className={styles.icons}>
+            <span>
+              <CiSearch />
+              <p className={styles.tooltip}>مشاهده سریع</p>
+            </span>
+            <div>
+              <CiHeart />
+              <p className={styles.tooltip}>افزودن به علاقه مندی ها </p>
+            </div>
+          </div>
+          <button>افزودن به سبد خرید</button>
         </div>
-        <span>
-          {price === 0 ? "رایگان" : price?.toLocaleString() + "تومان"}{" "}
-        </span>
+
+        <div className={styles.details}>
+          <span>{title}</span>
+          <div>
+            {Array(validScore)
+              .fill(0)
+              .map((i, id) => (
+                <FaStar key={id} />
+              ))}
+            {Array(5 - validScore)
+              .fill(0)
+              .map((i, id) => (
+                <FaRegStar key={id} />
+              ))}
+          </div>
+          <span>
+            {price === 0 ? "رایگان" : price?.toLocaleString() + "تومان"}{" "}
+          </span>
+        </div>
       </div>
-    </div>
+    </Link>
   );
 };
 

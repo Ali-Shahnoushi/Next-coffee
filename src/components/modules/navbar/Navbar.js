@@ -5,11 +5,14 @@ import styles from "./Nabvar.module.css";
 import Link from "next/link";
 import { IoIosArrowDown } from "react-icons/io";
 import { FaShoppingCart, FaRegHeart } from "react-icons/fa";
+import useStore from "@/utils/store";
 
-function Navbar({ isLogin }) {
+function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
 
-  useEffect(() => {
+  const { user, wishlist } = useStore();
+
+  useEffect(() => { 
     const stickNavbarTop = () => {
       const currentScroll = window.pageYOffset;
       if (currentScroll > 110) {
@@ -54,7 +57,7 @@ function Navbar({ isLogin }) {
           <li>
             <Link href="/rules">قوانین</Link>
           </li>
-          {!isLogin ? (
+          {!user ? (
             <li>
               <Link href="/login-register">ورود / عضویت</Link>
             </li>
@@ -62,8 +65,7 @@ function Navbar({ isLogin }) {
             <div className={styles.dropdown}>
               <Link href="/p-user">
                 <IoIosArrowDown className={styles.dropdown_icons} />
-                {/* عزیز {isLogin.name} !سلام */}
-                حساب کاربری
+                عزیز <span>{user?.name}</span> !سلام
               </Link>
               <div className={styles.dropdown_content}>
                 <Link href="/p-user/orders">سفارشات</Link>
@@ -83,7 +85,7 @@ function Navbar({ isLogin }) {
           </Link>
           <Link href="/wishlist">
             <FaRegHeart />
-            <span>1</span>
+            <span>{wishlist.length ? wishlist.length : 0}</span>
           </Link>
         </div>
       </main>

@@ -10,7 +10,7 @@ const Answer = ({ type, body, createdAt, user }) => {
         <div>
           <div>
             <p>{user.name}</p>
-            <span>کاربر</span>
+            <span>{type == "user" ? "" : "ادمین"}</span>
           </div>
           <img src="/images/shahin.jpg" alt="" />
         </div>

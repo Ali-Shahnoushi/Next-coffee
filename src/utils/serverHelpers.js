@@ -1,4 +1,5 @@
 import UserModel from "@/models/User";
+import WishlistModel from "@/models/Wishlist";
 import { cookies } from "next/dist/client/components/headers";
 import { connectToDB } from "@/configs/db";
 import { verifyToken } from "./auth";
@@ -8,14 +9,22 @@ const authUser = async () => {
   const token = cookies().get("token");
 
   let user = null;
+  let wishlist = null;
   if (token) {
     const tokenPayload = verifyToken(token.value);
     if (tokenPayload) {
       user = await UserModel.findOne({ email: tokenPayload.email });
+      wishlist = await WishlistModel.find({ user: user._id })
+        .populate("product", "title price score img")
+        .lean();
     }
   }
+  const userData = {
+    ...user._doc,
+    wishlist,
+  };
 
-  return user;
+  return userData;
 };
 
 const authAdmin = async () => {

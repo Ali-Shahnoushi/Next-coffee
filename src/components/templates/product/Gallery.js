@@ -7,9 +7,9 @@ import "swiper/css/thumbs";
 import { FreeMode, Navigation, Thumbs } from "swiper/modules";
 import { useState } from "react";
 
-const Gallery = () => {
+const Gallery = ({ img }) => {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
-  const images = ["/images/gallery-1.jpg", "/images/gallery-2.jpg"];
+  // const images = ["/images/gallery-1.jpg", "/images/gallery-2.jpg"];
 
   return (
     <section style={{ width: "36%" }}>
@@ -24,11 +24,9 @@ const Gallery = () => {
         modules={[FreeMode, Navigation, Thumbs]}
         className="mySwiper2 gallery-slider"
       >
-        {images.map((img, index) => (
-          <SwiperSlide key={index}>
-            <img src={img} />
-          </SwiperSlide>
-        ))}
+        <SwiperSlide>
+          <img src={img} />
+        </SwiperSlide>
       </Swiper>
 
       <Swiper
@@ -40,11 +38,9 @@ const Gallery = () => {
         modules={[FreeMode, Navigation, Thumbs]}
         className="gallery-slider-2"
       >
-        {images.map((img, index) => (
-          <SwiperSlide key={index}>
-            <img src={img} />
-          </SwiperSlide>
-        ))}
+        <SwiperSlide>
+          <img src={img} />
+        </SwiperSlide>
       </Swiper>
     </section>
   );

@@ -44,7 +44,6 @@ export default function DataTable({ users, title, bannedUsers }) {
           },
         });
         const data = await res.json();
-        console.log(data);
 
         if (res.status === 200) {
           swal({
@@ -77,7 +76,6 @@ export default function DataTable({ users, title, bannedUsers }) {
           body: JSON.stringify({ email, phone }),
         });
         const data = await res.json();
-        console.log(data);
 
         if (res.status === 200) {
           swal({

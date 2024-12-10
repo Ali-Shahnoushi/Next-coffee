@@ -13,7 +13,7 @@ export default async function Home() {
 
   return (
     <>
-      <Navbar isLogin={user ? true : false} />
+      <Navbar user={user ? user : false} />
       <Banner />
       <Latest products={JSON.parse(JSON.stringify(latestProducts))} />
       <Promote />

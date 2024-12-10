@@ -62,11 +62,18 @@ export async function POST(req) {
 
     await UserModel.findOneAndUpdate({ email }, { $set: { refreshToken } });
 
+    const headers = new Headers();
+    headers.append("Set-Cookie", `token=${accessToken};path=/;httpOnly=true;`);
+    headers.append(
+      "Set-Cookie",
+      `refresh-token=${refreshToken};path=/;httpOnly=true;`
+    );
+
     return Response.json(
       { message: "کاربر با موفقیت وارد شد" },
       {
         status: 200,
-        headers: { "Set-Cookie": `token=${accessToken};path=/;httpOnly=true;` },
+        headers,
       }
     );
   } catch (error) {

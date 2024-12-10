@@ -1,5 +1,6 @@
 const { connectToDB } = require("@/configs/db");
 import WishlistModel from "@/models/Wishlist";
+import ProductModel from "@/models/Product";
 
 export async function POST(req) {
   try {
@@ -10,24 +11,27 @@ export async function POST(req) {
 
     //todo validation
 
-    const wish = await WishlistModel.findOne({ user, product });
+    let wish = await WishlistModel.findOne({ user, product }).populate(
+      "product"
+    );
 
     if (wish) {
       await WishlistModel.findOneAndDelete({ user, product });
 
       return Response.json(
-        { message: "این محصول از علاقه‌مندی های شما حذف شد" },
+        { message: "این محصول از علاقه‌مندی های شما حذف شد", data: wish },
         { status: 202 }
-      );
-    } else {
-      await WishlistModel.create({ user, product });
-
-      return Response.json(
-        { message: "علاقه مندی با موفقیت افزوده شد" },
-        { status: 201 }
       );
     }
 
+    const productObject = await ProductModel.findOne({ _id: product });
+
+    await WishlistModel.create({ user, product });
+
+    return Response.json(
+      { message: "علاقه مندی با موفقیت افزوده شد", data: productObject },
+      { status: 201 }
+    );
   } catch (error) {
     console.log(error);
 

@@ -7,15 +7,17 @@ import { useEffect, useState } from "react";
 import stateData from "@/utils/stateData";
 import Select from "react-select";
 import swal from "sweetalert";
+import useStore from "@/utils/store";
 
 const stateOptions = stateData();
 
 const Table = () => {
-  const [cart, setCart] = useState([]);
   const [discount, setDiscount] = useState("");
   const [totalPrice, setTotalPrice] = useState(0);
   const [stateSelectedOption, setStateSelectedOption] = useState(null);
   const [changeAddress, setChangeAddress] = useState(false);
+
+  const { cart, setCart } = useStore();
 
   useEffect(() => {
     const localCart = JSON.parse(localStorage.getItem("cart")) || [];

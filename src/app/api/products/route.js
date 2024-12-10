@@ -39,8 +39,8 @@ export async function POST(req) {
       { message: "Product created successfully :))", data: product },
       { status: 201 }
     );
-  } catch (err) {
-    console.log(err);
+  } catch (error) {
+    console.log(error);
 
     return Response.json({ message: err }, { status: 500 });
   }

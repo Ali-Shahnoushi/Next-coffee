@@ -9,7 +9,7 @@ const page = async () => {
 
   return (
     <>
-      <Navbar isLogin={user ? true : false} />
+      <Navbar user={user ? user : false} />
       <Breadcrumb route={"قوانین"} />
       <div className={styles.container} data-aos="fade-up">
         <p>

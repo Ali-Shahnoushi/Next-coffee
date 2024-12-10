@@ -2,6 +2,9 @@ import AOSInit from "@/utils/aos";
 import "./globals.css";
 import ScrollToTop from "@/utils/SctollToTop";
 import { Toaster } from "react-hot-toast";
+import { connectToDB } from "@/configs/db";
+import { authUser } from "@/utils/serverHelpers";
+import Childrens from "@/components/templates/layout/Childrens";
 
 export const metadata = {
   title:
@@ -11,12 +14,15 @@ export const metadata = {
   icons: { icon: "/images/favicon.webp" },
 };
 
-export default function RootLayout({ children }) {
+export default async function RootLayout({ children }) {
+  connectToDB();
+  const user = await authUser();
+
   return (
     <html lang="fa">
       <body>
         <AOSInit />
-        {children}
+        <Childrens user={user}>{children}</Childrens>
         <ScrollToTop />
         <Toaster />
       </body>

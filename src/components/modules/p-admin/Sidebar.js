@@ -1,6 +1,6 @@
 "use client";
 import styles from "./sidebar.module.css";
-import { ImReply } from "react-icons/im";
+import { ImHome, ImReply } from "react-icons/im";
 import { FaComments, FaHeart, FaShoppingBag, FaUsers } from "react-icons/fa";
 import { MdOutlineAttachMoney } from "react-icons/md";
 import { MdSms, MdLogout } from "react-icons/md";
@@ -42,6 +42,10 @@ const Sidebar = () => {
       <ul className={styles.sidebar_main}>
         {path.includes("/p-user") ? (
           <>
+            <Link href={"/"} className={styles.sidebar_link_active}>
+              <ImHome />
+              صفحه اصلی
+            </Link>
             <Link href={"/p-user"} className={styles.sidebar_link_active}>
               <ImReply />
               پیشخوان

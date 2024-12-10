@@ -25,11 +25,11 @@ const product = async ({ params }) => {
 
   return (
     <div className={styles.container}>
-      <Navbar isLogin={user ? true : false} />
+      <Navbar user={user ? user : false} />
       <div data-aos="fade-up" className={styles.contents}>
         <div className={styles.main}>
           <Details product={JSON.parse(JSON.stringify(product))} />
-          <Gallery />
+          <Gallery img={product.img} />
         </div>
         <Tabs product={JSON.parse(JSON.stringify(product))} />
         <MoreProducts

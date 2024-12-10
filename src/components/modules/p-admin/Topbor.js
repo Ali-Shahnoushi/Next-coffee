@@ -1,13 +1,15 @@
+import useStore from "@/utils/store";
 import styles from "./topbar.module.css";
 import { IoIosSearch, IoIosNotifications } from "react-icons/io";
 const Topbar = () => {
+  const { user } = useStore();
   return (
     <>
       <div className={styles.topbar}>
         <div className={styles.profile}>
           <div>
-            <p>شاهین مشکل گشا</p>
-            <span>ادمین</span>
+            <p>{user.name}</p>
+            <span>{user.role == "ADMIN" ? "ادمین" : "کاربر"}</span>
           </div>
           <img src="/images/shahin.jpg" alt="" />
         </div>

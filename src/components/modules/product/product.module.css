@@ -94,7 +94,7 @@
   border: 1px solid white;
   border-radius: 4px;
 }
-.icons a,
+.icons span,
 .icons div {
   display: flex;
   flex-direction: row-reverse;
@@ -116,7 +116,7 @@
   position: relative;
 }
 
-.icons a:hover .tooltip,
+.icons span:hover .tooltip,
 .icons div:hover .tooltip {
   opacity: 1;
 }
