@@ -25,7 +25,7 @@
   color: black;
   outline: 0;
   border-radius: 5px;
-  border: 3px solid #711d1c;
+  border: 3px solid #2d2b2b;
   margin-top: 4.5px;
 }
 .details input[type="number"]::-webkit-outer-spin-button,
@@ -55,7 +55,7 @@
   outline: 0;
   color: black;
   border-radius: 5px;
-  border: 3px solid #711d1c;
+  border: 3px solid #2d2b2b;
   width: 100%;
 }
 
@@ -104,10 +104,10 @@
 }
 
 .title:after {
-  border-bottom: 1px solid #711d1c;
-  -webkit-box-shadow: 0 1px 0 0 #711d1c;
-  -moz-box-shadow: 0 1px 0 0 #711d1c;
-  box-shadow: 0 1px 0 0 #711d1c;
+  border-bottom: 1px solid #2d2b2b;
+  -webkit-box-shadow: 0 1px 0 0 #2d2b2b;
+  -moz-box-shadow: 0 1px 0 0 #2d2b2b;
+  box-shadow: 0 1px 0 0 #2d2b2b;
   content: "";
   margin: 0 auto;
   position: absolute;
@@ -127,7 +127,7 @@
   content: "";
   width: 40px;
   height: 2px;
-  background-color: #711d1c;
+  background-color: #2d2b2b;
   position: absolute;
   transform: rotate(327deg);
   top: 16px;
@@ -137,7 +137,7 @@
   content: "";
   width: 70px;
   height: 2px;
-  background-color: #711d1c;
+  background-color: #2d2b2b;
   position: absolute;
   transform: rotate(327deg);
   top: 24px;
@@ -147,14 +147,14 @@
   width: 200px;
   display: block;
   border-radius: 100%;
-  border: 2px solid #711d1c;
+  border: 2px solid #2d2b2b;
 }
 .uploader button svg {
   font-size: 1.5rem;
 }
 .uploader button,
 .password_group button {
-  background-color: #711d1c;
+  background-color: #2d2b2b;
   color: white;
   padding: 0.7rem;
   margin-top: 10px;
@@ -203,7 +203,7 @@
 }
 
 .submit_btn {
-  background-color: #711d1c;
+  background-color: #2d2b2b;
   color: white;
   padding: 0.4rem;
   display: flex;

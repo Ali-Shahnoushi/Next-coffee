@@ -2,9 +2,10 @@
 
 import { useState } from "react";
 import styles from "./topbar.module.css";
-import { IoIosSearch, IoIosNotifications } from "react-icons/io";
 import Modal from "./Modal";
 import useStore from "@/utils/store";
+import { FaMedal } from "react-icons/fa";
+
 const Topbar = () => {
   const [showNotifications, setShowNotifications] = useState(false);
   const [showModal, setShowModal] = useState(false);
@@ -22,7 +23,7 @@ const Topbar = () => {
           <img src="/images/admin.jpg" alt="" />
         </div>
         <section>
-          <div className={styles.searchBox}>
+          {/* <div className={styles.searchBox}>
             <input type="text" placeholder="جستجو کنید" />
             <div>
               <IoIosSearch />
@@ -34,7 +35,17 @@ const Topbar = () => {
           >
             <IoIosNotifications />
             <span>0</span>
-          </div>
+          </div> */}
+          <span
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "4px",
+              fontSize: "12px",
+            }}
+          >
+            سطح طلایی <FaMedal color="gold" size={20} />
+          </span>
         </section>
       </div>
 

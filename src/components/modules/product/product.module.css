@@ -31,7 +31,8 @@
   height: 312px;
 }
 .card span {
-  color: rgb(52, 24, 14);
+  color: #000000;
+  font-family: "peyda";
 }
 .details_container {
   position: relative;

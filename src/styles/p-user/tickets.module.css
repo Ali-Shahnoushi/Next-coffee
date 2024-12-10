@@ -12,7 +12,7 @@
 
 .title a {
   background-color: #ffffff;
-  color: #711d1c;
+  color: #2d2b2b;
   font-size: 1rem;
   display: flex;
   position: relative;
@@ -20,7 +20,7 @@
   border-radius: 20px;
   padding: 0 10px;
   align-items: center;
-  border: 1px solid #711d1c;
+  border: 1px solid #2d2b2b;
 }
 
 .title:before {
@@ -47,10 +47,10 @@
 }
 
 .title:after {
-  border-bottom: 1px solid #711d1c;
-  -webkit-box-shadow: 0 1px 0 0 #711d1c;
-  -moz-box-shadow: 0 1px 0 0 #711d1c;
-  box-shadow: 0 1px 0 0 #711d1c;
+  border-bottom: 1px solid #2d2b2b;
+  -webkit-box-shadow: 0 1px 0 0 #2d2b2b;
+  -moz-box-shadow: 0 1px 0 0 #2d2b2b;
+  box-shadow: 0 1px 0 0 #2d2b2b;
   content: "";
   margin: 0 auto;
   position: absolute;
@@ -76,7 +76,7 @@
   padding: 10px;
   color: black;
   border: none;
-  border-bottom: 3px solid #711d1c;
+  border-bottom: 3px solid #2d2b2b;
   margin-top: 4.5px;
   width: 150px;
   outline: 0;
@@ -101,15 +101,15 @@
   color: white;
   border-radius: 4px;
   cursor: pointer;
-  background-color: #711d1c;
+  background-color: #2d2b2b;
 }
 .empty {
   width: 100%;
   border-radius: 5px;
   border-radius: 5px;
-  background-color: #711d1c21;
+  background-color: #2d2b2b21;
   text-align: center;
   margin-top: 60px;
   padding: 20px 0;
-  color: #711d1c;
+  color: #2d2b2b;
 }

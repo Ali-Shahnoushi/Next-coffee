@@ -5,10 +5,12 @@ import swal from "sweetalert";
 import { IoCloudUploadOutline } from "react-icons/io5";
 import { MdOutlineDelete } from "react-icons/md";
 import { useState } from "react";
+import useStore from "@/utils/store";
 
 function AccountDetails() {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
+  const { setUser, user } = useStore();
 
   useEffect(() => {
     const getUser = async () => {
@@ -41,13 +43,12 @@ function AccountDetails() {
 
     if (res.status === 200) {
       swal({
-        title: "اطلاعات مورد نظر با موفقیت آپدیت شد",
+        button: [""],
+        text: "اطلاعات حساب‌کاربری بروز شد",
         icon: "success",
-        buttons: "فهمیدم",
+        timer: 1500,
       }).then(async (result) => {
-        // await fetch("/api/auth/signout", { method: "POST" });
-        // location.replace("/login-register");
-        location.reload();
+        setUser({ ...user, name, phone });
       });
     }
   };

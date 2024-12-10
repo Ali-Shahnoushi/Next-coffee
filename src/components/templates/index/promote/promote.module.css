@@ -11,7 +11,7 @@
   flex-direction: row-reverse;
 }
 .main section {
-  font-family: shabnam;
+  font-family: peyda;
   color: black;
   width: 50%;
 }
@@ -56,7 +56,7 @@
   margin-left: auto;
 }
 .title {
-  color: #711d1c;
+  color: #2d2b2b;
   font-size: 44px;
 }
 
@@ -69,8 +69,8 @@
   justify-content: right;
 }
 .red_btn {
-  background-color: #711d1c !important;
-  border: 1px solid #711d1c !important;
+  background-color: #2d2b2b !important;
+  border: 1px solid #2d2b2b !important;
   color: white !important;
 }
 .why_coffee div button {
@@ -80,7 +80,7 @@
   margin-top: 2rem;
   color: black;
   background: white;
-  font-family: shabnam;
+  font-family: peyda;
 }
 .why_coffee p:nth-child(3) {
   margin-top: 1rem;

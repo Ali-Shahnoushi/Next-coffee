@@ -11,7 +11,7 @@
 
 .tabs .contents section h2,
 .tabs ul li label {
-  font-family: "Montserrat";
+  font-family: "peyda";
   font-weight: bold;
   font-size: 18px;
   color: #428bff;
@@ -50,7 +50,7 @@
   display: block;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
-  font-family: shabnam;
+  font-family: peyda;
 }
 
 .contents {
@@ -70,7 +70,7 @@
   animation-duration: 0.3s;
   -webkit-animation-timing-function: ease-in-out;
   animation-timing-function: ease-in-out;
-  font-family: shabnam;
+  font-family: peyda;
   -webkit-animation-iteration-count: 1;
   animation-iteration-count: 1;
   line-height: 1.4;

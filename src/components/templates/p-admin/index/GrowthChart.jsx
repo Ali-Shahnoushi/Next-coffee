@@ -32,7 +32,7 @@ export default function GrowthChart() {
         <XAxis dataKey="date" />
         <YAxis />
         <Tooltip />
-        <Line type="monotone" dataKey="prev" stroke="#711D1C" />
+        <Line type="monotone" dataKey="prev" stroke="#2d2b2b" />
         <Line type="monotone" dataKey="current" stroke="#000" />
       </LineChart>
     </ResponsiveContainer>

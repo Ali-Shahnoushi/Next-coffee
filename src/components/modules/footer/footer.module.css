@@ -7,7 +7,7 @@
 .descriptions {
   width: 300px;
   padding: 10px;
-  font-family: shabnam;
+  font-family: peyda;
   font-size: 15px;
   direction: rtl;
 }
@@ -38,7 +38,7 @@
   padding-top: 0.5rem;
 }
 .footer_article {
-  font-family: shabnam;
+  font-family: peyda;
   display: flex;
   gap: 15px;
   align-items: center;
@@ -47,16 +47,16 @@
   margin: 20px 0px;
 }
 .footer_article_title {
-  font-family: shabnam-Bold;
+  font-family: peyda-Bold;
 }
 .footer h4 {
   margin-bottom: 15px;
-  font-family: shabnam-Bold;
+  font-family: peyda-Bold;
 }
 .links li {
   list-style: none;
   margin-top: 10px;
-  font-family: shabnam;
+  font-family: peyda;
   color: rgba(255, 255, 255, 0.5);
 }
 .links {
@@ -78,7 +78,7 @@
   grid-template-columns: auto auto;
 }
 .copyRight {
-  font-family: shabnam;
+  font-family: peyda;
   direction: rtl;
   padding: 20px 0px;
   font-size: 12px;

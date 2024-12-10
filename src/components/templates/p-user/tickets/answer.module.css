@@ -1,6 +1,6 @@
 .userTicket {
   width: 50%;
-  background-color: #711d1c;
+  background-color: #2d2b2b;
   border-radius: 5px;
   padding: 0px 10px 10px;
   color: white;
@@ -12,7 +12,7 @@
   background-color: #f9f9f9;
   border-radius: 5px;
   padding: 0px 10px 10px;
-  border: #711d1c 3px solid;
+  border: #2d2b2b 3px solid;
   margin-bottom: 15px;
   margin-right: auto;
 }
@@ -40,7 +40,7 @@
 }
 
 .adminticket .ticket_text {
-  background-color: #711d1c;
+  background-color: #2d2b2b;
   color: white;
 }
 
@@ -57,11 +57,11 @@
   width: 100%;
   border-radius: 5px;
   border-radius: 5px;
-  background-color: #711d1c21;
+  background-color: #2d2b2b21;
   text-align: center;
   margin-top: 60px;
   padding: 20px 0;
-  color: #711d1c;
+  color: #2d2b2b;
 }
 
 .ticket_main div div span {

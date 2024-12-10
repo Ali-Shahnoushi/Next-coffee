@@ -1,20 +1,19 @@
 @font-face {
-  font-family: shabnam;
-  src: url("/fonts/shabnam/Shabnam-Medium.woff");
+  font-family: peyda;
+  /* src: url("/fonts/shabnam/Shabnam-Medium.woff"); */
+  src: url("/fonts/peyda/Peyda-Regular.woff");
 }
 
 @font-face {
-  font-family: shabnam-Bold;
-  src: url("/fonts/shabnam/Shabnam-Bold.woff");
+  font-family: peyda-Bold;
+  src: url("/fonts/peyda/Peyda-Bold.woff");
 }
-
 * {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
-  font-family: shabnam;
+  font-family: peyda;
 }
-
 body::-webkit-scrollbar {
   width: 10px;
   background-color: #fff !important;
@@ -22,7 +21,7 @@ body::-webkit-scrollbar {
 }
 
 body::-webkit-scrollbar-thumb {
-  background-color: #711d1c !important;
+  background-color: #2d2b2b !important;
 }
 
 html,
@@ -125,7 +124,7 @@ a {
 
 .swal-modal {
   background: #ffffff !important;
-  border: 1px solid #711d1c;
+  border: 1px solid #2f3036;
 }
 
 .swal-title {
@@ -135,13 +134,13 @@ a {
 
 .swal-button--confirm {
   background: #fff;
-  color: #711d1c;
+  color: #2d2b2b;
 }
 
 .swal-content__input:focus,
 .swal-content__textarea:focus {
   outline: none;
-  border-color: #711d1c !important;
+  border-color: #2d2b2b !important;
 }
 
 .swal-button:not([disabled]):hover {

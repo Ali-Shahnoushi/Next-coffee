@@ -6,7 +6,7 @@
   padding-top: 0.5rem;
 }
 .article {
-  font-family: shabnam;
+  font-family: peyda;
   display: flex;
   gap: 15px;
   align-items: center;
@@ -15,9 +15,9 @@
   margin: 20px 0px;
 }
 .title {
-  font-family: shabnam-Bold;
+  font-family: peyda-Bold;
 }
 .footer h4 {
   margin-bottom: 15px;
-  font-family: shabnam-Bold;
+  font-family: peyda-Bold;
 }

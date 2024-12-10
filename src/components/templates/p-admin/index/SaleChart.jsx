@@ -32,7 +32,7 @@ export default function SaleChart() {
         <XAxis dataKey="date" />
         <YAxis />
         <Tooltip />
-        <Area type="monotone" dataKey="sale" stroke="#000" fill="#711D1C" />
+        <Area type="monotone" dataKey="sale" stroke="#000" fill="#2d2b2b" />
       </AreaChart>
     </ResponsiveContainer>
   );

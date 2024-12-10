@@ -6,13 +6,13 @@
 .box {
   border-radius: 5px;
   padding: 1rem;
-  border: 2px solid #711d1c;
+  border: 2px solid #2d2b2b;
   position: relative;
   width: 270px;
   margin: 0 auto;
 }
 .box_chart_icon {
-  color: #711d1c;
+  color: #2d2b2b;
   font-size: 2.5rem;
 }
 .box p::after {
@@ -21,7 +21,7 @@
   height: 2px;
   top: 6px;
   display: block;
-  background-color: #711d1c;
+  background-color: #2d2b2b;
   width: 80%;
 }
 .box p::before {
@@ -30,6 +30,6 @@
   height: 2px;
   top: 40px;
   display: block;
-  background-color: #711d1c;
+  background-color: #2d2b2b;
   width: 58%;
 }

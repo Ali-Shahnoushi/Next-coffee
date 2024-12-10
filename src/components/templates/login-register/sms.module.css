@@ -1,7 +1,7 @@
 .btn {
   padding: 0.8rem;
   cursor: pointer;
-  font-family: shabnam;
+  font-family: peyda;
   background-color: rgb(52, 24, 14);
 }
 
@@ -10,7 +10,7 @@
   background-color: white;
   padding: 50px 95px;
   width: 380px;
-  font-family: shabnam;
+  font-family: peyda;
   margin: 7rem auto 2rem;
   border-radius: 4px;
   box-shadow: 0px 3px 6px 0px rgba(0, 0, 0, 0.16);
@@ -19,7 +19,7 @@
 }
 
 .input {
-  font-family: shabnam;
+  font-family: peyda;
   padding: 13px;
   background-color: white;
   color: black;
@@ -62,7 +62,7 @@
   width: max-content;
   margin: 0 auto;
   cursor: pointer;
-  font-family: shabnam;
+  font-family: peyda;
   font-size: 13px;
   color: rgb(52, 24, 14);
 }

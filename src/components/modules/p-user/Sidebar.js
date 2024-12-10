@@ -14,6 +14,8 @@ const Sidebar = () => {
   const path = usePathname();
   const router = useRouter();
 
+  console.log(path);
+
   const logoutHandler = () => {
     swal({
       title: "آیا از خروج اطمینان دارید؟",
@@ -43,31 +45,61 @@ const Sidebar = () => {
       <ul className={styles.sidebar_main}>
         {path.includes("/p-user") ? (
           <>
-            <Link href={"/"} className={styles.sidebar_link_active}>
+            <Link href={"/"}>
               <ImHome />
               صفحه اصلی
             </Link>
-            <Link href={"/p-user"} className={styles.sidebar_link_active}>
+            <Link
+              href={"/p-user"}
+              className={path === "/p-user" ? styles.sidebar_link_active : ""}
+            >
               <ImReply />
               پیشخوان
             </Link>
-            <Link href={"/p-user/orders"}>
+            <Link
+              href={"/p-user/orders"}
+              className={
+                path === "/p-user/orders" ? styles.sidebar_link_active : ""
+              }
+            >
               <FaShoppingBag />
               سفارش ها
             </Link>
-            <Link href={"/p-user/tickets"}>
+            <Link
+              href={"/p-user/tickets"}
+              className={
+                path === "/p-user/tickets" ? styles.sidebar_link_active : ""
+              }
+            >
               <MdSms />
               تیکت های پشتیبانی
             </Link>
-            <Link href={"/p-user/comments"}>
+            <Link
+              href={"/p-user/comments"}
+              className={
+                path === "/p-user/comments" ? styles.sidebar_link_active : ""
+              }
+            >
               <FaComments />
               کامنت ها
             </Link>
-            <Link href={"/p-user/wishlist"}>
+            <Link
+              href={"/p-user/wishlist"}
+              className={
+                path === "/p-user/wishlist" ? styles.sidebar_link_active : ""
+              }
+            >
               <FaHeart />
               علاقه مندی
             </Link>
-            <Link href={"/p-user/account-details"}>
+            <Link
+              href={"/p-user/account-details"}
+              className={
+                path === "/p-user/account-details"
+                  ? styles.sidebar_link_active
+                  : ""
+              }
+            >
               <TbListDetails />
               جزئیات اکانت
             </Link>
