@@ -69,7 +69,7 @@
 }
 .counter span:hover {
   color: white;
-  background: rgb(52, 24, 14);
+  background: #494857;
   transition: 0.1s all ease-in;
 }
 .counter span,
@@ -125,7 +125,7 @@
 }
 
 .set_off_btn:hover {
-  background: rgb(113, 29, 28) !important;
+  background: #494857 !important;
 }
 .tabel_container section input {
   padding: 0.7rem 1rem;

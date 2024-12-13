@@ -9,10 +9,10 @@ import useStore from "@/utils/store";
 
 function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [cartCount, setCartCount] = useState(0);
 
-  const { user, wishlist } = useStore();
-
-  useEffect(() => { 
+  const { user, wishlist, cart } = useStore();
+  useEffect(() => {
     const stickNavbarTop = () => {
       const currentScroll = window.pageYOffset;
       if (currentScroll > 110) {
@@ -22,12 +22,14 @@ function Navbar() {
       }
     };
 
+    setCartCount(cart.reduce((sum, item) => sum + item.count, 0));
+
     window.addEventListener("scroll", stickNavbarTop);
 
     return () => {
       window.removeEventListener("scroll", stickNavbarTop);
     };
-  }, []);
+  }, [cart]);
 
   return (
     <nav className={isScrolled ? styles.navbar_fixed : styles.navbar}>
@@ -80,11 +82,11 @@ function Navbar() {
 
         <div className={styles.navbar_icons}>
           <Link href="/cart">
-            <FaShoppingCart />
-            <span>1</span>
+            <FaShoppingCart color="#a5a5a5" />
+            <span>{cartCount}</span>
           </Link>
           <Link href="/wishlist">
-            <FaRegHeart />
+            <FaRegHeart color="#bb3333" />
             <span>{wishlist.length ? wishlist.length : 0}</span>
           </Link>
         </div>

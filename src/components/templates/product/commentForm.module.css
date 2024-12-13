@@ -81,8 +81,8 @@
   outline: none;
 }
 .checkbox input:checked {
-  background-color: rgb(52, 24, 14);
-  border-color: rgb(52, 24, 14);
+  background-color: #494857;
+  border-color: #494857;
 }
 .checkbox input:checked + label {
   text-decoration: line-through;
@@ -93,7 +93,7 @@
 .checkbox input:checked:focus,
 .checkbox input:checked:hover {
   box-shadow: 0 0 0 3px #d9d9d9;
-  border-color: rgb(52, 24, 14);
+  border-color: #494857;
 }
 .checkbox input:after {
   content: "";

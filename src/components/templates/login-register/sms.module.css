@@ -2,7 +2,7 @@
   padding: 0.8rem;
   cursor: pointer;
   font-family: peyda;
-  background-color: rgb(52, 24, 14);
+  background-color: #494857;
 }
 
 .form {
@@ -64,5 +64,5 @@
   cursor: pointer;
   font-family: peyda;
   font-size: 13px;
-  color: rgb(52, 24, 14);
+  color: #494857;
 }

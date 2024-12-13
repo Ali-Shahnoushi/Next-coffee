@@ -18,6 +18,10 @@ export default function Childrens({ children, user }) {
       (wishlist) => wishlist.product
     );
 
+    // const cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    // setCart(cart);
+
     setWishlist(allWishlistProducts);
   }, []);
 

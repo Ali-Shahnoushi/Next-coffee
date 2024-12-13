@@ -8,69 +8,45 @@ import styles from "./details.module.css";
 import Breadcrumb from "./Breadcrumb";
 import AddToWishlist from "./AddToWishlist";
 import { useState } from "react";
+import useStore from "@/utils/store";
 
 const Details = ({ product }) => {
   const [count, setCount] = useState(1);
+  const { addItemToCart } = useStore();
 
   const addToCart = () => {
-    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    // const isExistInCart = cart.some((item) => item.id === product._id);
 
-    if (cart.length) {
-      const isExistInCart = cart.some((item) => item.id === product._id);
+    // if (isExistInCart) {
+    //   cart.forEach((item) => {
+    //     if (item.id === product._id) {
+    //       item.count += count;
+    //     }
+    //   });
 
-      if (isExistInCart) {
-        cart.forEach((item) => {
-          if (item.id === product._id) {
-            item.count += count;
-          }
-        });
+    //   swal({
+    //     icon: "success",
+    //     text: "محصول با موفقیت به سبد خرید اضافه شد",
+    //     timer: 1500,
+    //     buttons: [""],
+    //   });
+    // } else {
+    const cartItem = {
+      id: product._id,
+      title: product.title,
+      price: product.price,
+      count,
+    };
 
-        localStorage.setItem("cart", JSON.stringify(cart));
+    addItemToCart(cartItem, count);
 
-        swal({
-          icon: "success",
-          text: "محصول با موفقیت به سبد خرید اضافه شد",
-          timer: 1500,
-          buttons: [""],
-        });
-      } else {
-        const cartItem = {
-          id: product._id,
-          title: product.title,
-          price: product.price,
-          count,
-        };
-
-        cart.push(cartItem);
-
-        localStorage.setItem("cart", JSON.stringify(cart));
-
-        swal({
-          icon: "success",
-          text: "محصول با موفقیت به سبد خرید اضافه شد",
-          timer: 1500,
-          buttons: [""],
-        });
-      }
-    } else {
-      const cartItem = {
-        id: product._id,
-        title: product.title,
-        price: product.price,
-        count,
-      };
-
-      cart.push(cartItem);
-
-      localStorage.setItem("cart", JSON.stringify(cart));
-
-      swal({
-        icon: "success",
-        text: "محصول با موفقیت به سبد خرید اضافه شد",
-        timer: 1500,
-        buttons: [""],
-      });
-    }
+    swal({
+      icon: "success",
+      text: "محصول با موفقیت به سبد خرید اضافه شد",
+      timer: 1500,
+      buttons: [""],
+    });
+    // }
   };
 
   return (

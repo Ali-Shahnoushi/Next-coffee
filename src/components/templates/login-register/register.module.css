@@ -37,7 +37,7 @@
   cursor: pointer;
   color: white !important;
   font-family: peyda;
-  background-color: rgb(52, 24, 14);
+  background-color: #494857;
 }
 
 .forgot_pass {
@@ -67,5 +67,5 @@
   cursor: pointer;
   font-family: peyda;
   font-size: 13px;
-  color: rgb(52, 24, 14);
+  color: #494857;
 }

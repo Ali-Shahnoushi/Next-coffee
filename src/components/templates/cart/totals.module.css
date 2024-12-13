@@ -57,13 +57,13 @@
 }
 
 .total p:nth-child(2) {
-  color: rgb(52, 24, 14);
+  color: #494857;
   font-size: 22px;
   direction: rtl;
 }
 
 .checkout_btn:hover {
-  background: rgb(113, 29, 28) !important;
+  background: #494857 !important;
 }
 
 .checkout_btn {

@@ -61,7 +61,7 @@
   font-size: 14px;
   font-weight: 500;
   font-family: "peyda", Arial, Helvetica, sans-serif;
-  color: rgb(52, 24, 14);
+  color: #494857;
   white-space: nowrap;
 }
 
@@ -80,7 +80,7 @@
   top: -7px;
   font-size: 0.5rem;
   padding: 0.2rem 0.4rem;
-  background: rgb(52, 24, 14);
+  background: #494857;
   color: white;
   position: absolute;
 }
@@ -99,7 +99,7 @@
   align-items: center;
 }
 .dropdown_content a:hover {
-  color: rgb(52, 24, 14);
+  color: #494857;
 }
 .dropdown_content a {
   padding-top: 8px;

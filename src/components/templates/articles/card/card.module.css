@@ -1,0 +1,26 @@
+.card img {
+  height: 23px;
+  width: 100%;
+  object-fit: cover;
+}
+
+.title:hover {
+  color: #2a2a32;
+}
+.title {
+  font-size: 20px;
+  transition: 0.1s all ease-in;
+  line-height: 1.5em;
+  font-weight: 700;
+  margin: 15px 0;
+  color: #494857;
+  display: block;
+}
+.description {
+  color: gray;
+}
+.card a:last-child {
+  font-size: 12px;
+  display: block;
+  margin-top: 1rem;
+}

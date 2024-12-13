@@ -2,10 +2,21 @@ import Link from "next/link";
 import styles from "./product.module.css";
 import { FaRegStar, FaStar } from "react-icons/fa";
 import { CiSearch, CiHeart } from "react-icons/ci";
+import useStore from "@/utils/store";
+import swal from "sweetalert";
 
 const ProductCard = ({ _id, title, price, score, img }) => {
   const validScore =
     typeof score === "number" && score >= 1 && score <= 5 ? score : 1;
+
+  const { addItemToCart } = useStore();
+
+  const cartItem = {
+    id: _id,
+    title,
+    price,
+    count: 1,
+  };
 
   return (
     <Link href={`/product/${_id}`}>
@@ -28,7 +39,21 @@ const ProductCard = ({ _id, title, price, score, img }) => {
               <p className={styles.tooltip}>افزودن به علاقه مندی ها </p>
             </div>
           </div>
-          <button>افزودن به سبد خرید</button>
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              e.preventDefault();
+              addItemToCart(cartItem);
+              swal({
+                icon: "success",
+                text: "محصول با موفقیت به سبد خرید اضافه شد",
+                timer: 1500,
+                buttons: [""],
+              });
+            }}
+          >
+            افزودن به سبد خرید
+          </button>
         </div>
 
         <div className={styles.details}>

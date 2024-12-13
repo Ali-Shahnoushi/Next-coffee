@@ -17,12 +17,7 @@ const Table = () => {
   const [stateSelectedOption, setStateSelectedOption] = useState(null);
   const [changeAddress, setChangeAddress] = useState(false);
 
-  const { cart, setCart } = useStore();
-
-  useEffect(() => {
-    const localCart = JSON.parse(localStorage.getItem("cart")) || [];
-    setCart(localCart);
-  }, []);
+  const { cart, removeFromCart, addItemToCart } = useStore();
 
   useEffect(calcTotalPrice, [cart]);
 
@@ -89,14 +84,26 @@ const Table = () => {
             </tr>
           </thead>
           <tbody>
-            {cart.map((item) => (
-              <tr>
+            {cart.map((item, i) => (
+              <tr key={i}>
                 <td>{(item.count * item.price).toLocaleString()} تومان</td>
                 <td className={styles.counter}>
                   <div>
-                    <span>-</span>
+                    <span
+                      onClick={() => {
+                        removeFromCart(item.id);
+                      }}
+                    >
+                      -
+                    </span> 
                     <p>{item.count}</p>
-                    <span>+</span>
+                    <span
+                      onClick={() => {
+                        addItemToCart(item);
+                      }}
+                    >
+                      +
+                    </span>
                   </div>
                 </td>
                 <td className={styles.price}>
@@ -107,11 +114,16 @@ const Table = () => {
                     src="https://set-coffee.com/wp-content/uploads/2020/12/Red-box-DG--430x430.jpg"
                     alt=""
                   />
-                  <Link href={"/"}>{item.title}</Link>
+                  <Link href={`/product/${item.id}`}>{item.title}</Link>
                 </td>
 
                 <td>
-                  <IoMdClose className={styles.delete_icon} />
+                  <IoMdClose
+                    onClick={() => {
+                      removeFromCart(item.id, true);
+                    }}
+                    className={styles.delete_icon}
+                  />
                 </td>
               </tr>
             ))}

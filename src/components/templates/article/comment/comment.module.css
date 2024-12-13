@@ -1,38 +1,59 @@
-.form {
-  display: grid;
-  background-color: white;
-  padding: 10px 25px;
-  width: 380px;
-  font-family: peyda;
-  margin: 7rem auto 2rem;
-  border-radius: 4px;
-  box-shadow: 0px 3px 6px 0px rgba(0, 0, 0, 0.16);
-  text-align: center;
-  color: black;
+.title {
+  font-weight: 900;
+  font-size: 22px;
+  margin-top: 3rem;
+  margin-bottom: 20px;
 }
 
-.input {
-  font-family: peyda;
-  padding: 13px;
-  background-color: white;
-  color: black;
-  border-radius: 3px;
-  border: 1px solid black;
+.comment p,
+.comment label {
   direction: rtl;
-  margin-top: 20px;
 }
 
-.checkbox p {
-  font-size: 14px;
-  font-family: peyda;
+.comment span {
+  color: red;
+}
+
+.group {
+  flex-direction: column;
+  gap: 3px;
+  margin-top: 1rem;
+  display: flex;
+}
+
+.group textarea {
+  resize: none;
+  width: 100%;
+  border: 1px solid rgba(128, 128, 128, 0.386);
+  direction: rtl;
+  border-radius: 5px;
+  background-color: white;
+  color: black;
+}
+
+.groups {
+  width: 100%;
+  display: flex;
+  gap: 20px;
+}
+.groups .group {
+  width: 100%;
+}
+.group input {
+  padding: 0.8rem 1rem;
+  direction: rtl;
+  background: white;
+  border: 1px solid rgba(128, 128, 128, 0.386);
+  border-radius: 5px;
+  background-color: white;
+  color: black;
 }
 .checkbox {
   display: flex;
-  margin: 20px 0 10px;
-  justify-content: right;
+  gap: 10px;
   flex-direction: row-reverse;
+  margin-top: 20px;
   align-items: center;
-  gap: 6px;
 }
 
 .checkbox input {
@@ -80,41 +101,33 @@
   border-color: #8c8c8c;
 }
 
-.btn_light {
-  color: rgb(109, 109, 109);
-  border: 1px solid rgb(214, 214, 214);
-  margin-bottom: 3rem;
-  cursor: pointer;
-  padding: 1rem;
-  font-family: peyda;
-  background: rgb(242, 242, 242);
+.comment button:hover {
+  background-color: #108c75;
 }
-.btn {
-  padding: 0.8rem;
-  cursor: pointer;
-  font-family: peyda;
-  background-color: #494857;
-}
-
-.forgot_pass {
+.comment button {
+  padding: 12px 20px;
   font-size: 13px;
-  margin: 15px 0;
+  line-height: 18px;
+  background-color: #f3f3f3;
+  color: #3e3e3e;
+  position: relative;
+  background-color: rgb(0, 137, 121);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  outline: none;
+  border: 0px solid transparent;
+  margin-top: 20px;
+  border-radius: 5px;
+  box-shadow: none;
+  vertical-align: middle;
+  text-align: center;
+  text-decoration: none;
+  color: white;
+  text-transform: uppercase;
+  text-shadow: none;
+  font-weight: 600;
   cursor: pointer;
-}
-
-.form span {
-  text-align: right;
-  margin-top: 30px;
-  margin-bottom: 20px;
-  font-size: 13px;
-}
-
-.redirect_to_home {
-  display: block;
-  width: max-content;
-  margin: 0 auto;
-  font-family: peyda;
-  cursor: pointer;
-  font-size: 13px;
-  color: #494857;
+  transition: color 0.25s ease, background-color 0.25s ease,
+    border-color 0.25s ease, box-shadow 0.25s ease, opacity 0.25s ease;
 }
