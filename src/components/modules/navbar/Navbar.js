@@ -87,7 +87,7 @@ function Navbar() {
           </Link>
           <Link href="/wishlist">
             <FaRegHeart color="#bb3333" />
-            <span>{wishlist.length ? wishlist.length : 0}</span>
+            <span>{wishlist?.length ? wishlist.length : 0}</span>
           </Link>
         </div>
       </main>

@@ -146,8 +146,8 @@
   transition: 0.1s all ease-in;
   font-size: 14px;
   line-height: 20px;
-  margin-top: 4rem;
-  border-radius: 0.001px;
+  margin-top: 2rem;
+  border-radius: 4px;
   color: white;
   box-shadow: inset 0 -2px 0 rgba(0, 0, 0, 0.15);
   background-color: rgb(0, 137, 121);

@@ -1,16 +1,17 @@
-const { default: mongoose } = require("mongoose");
+const mongoose = require("mongoose");
+
 require("./User");
 require("./Product");
 
 const schema = new mongoose.Schema(
   {
     user: {
-      type: mongoose.Types.ObjectId,
+      type: mongoose.Schema.Types.ObjectId,
       ref: "User",
       required: true,
     },
     product: {
-      type: mongoose.Types.ObjectId,
+      type: mongoose.Schema.Types.ObjectId,
       ref: "Product",
       required: true,
     },

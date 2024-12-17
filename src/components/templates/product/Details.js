@@ -15,26 +15,11 @@ const Details = ({ product }) => {
   const { addItemToCart } = useStore();
 
   const addToCart = () => {
-    // const isExistInCart = cart.some((item) => item.id === product._id);
-
-    // if (isExistInCart) {
-    //   cart.forEach((item) => {
-    //     if (item.id === product._id) {
-    //       item.count += count;
-    //     }
-    //   });
-
-    //   swal({
-    //     icon: "success",
-    //     text: "محصول با موفقیت به سبد خرید اضافه شد",
-    //     timer: 1500,
-    //     buttons: [""],
-    //   });
-    // } else {
     const cartItem = {
       id: product._id,
       title: product.title,
       price: product.price,
+      img: product.img,
       count,
     };
 

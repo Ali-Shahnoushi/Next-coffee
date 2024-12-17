@@ -19,10 +19,12 @@ const authUser = async () => {
         .lean();
     }
   }
-  const userData = {
-    ...user._doc,
-    wishlist,
-  };
+  const userData = user?._doc
+    ? {
+        ...user._doc,
+        wishlist,
+      }
+    : null;
 
   return userData;
 };

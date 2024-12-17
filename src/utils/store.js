@@ -71,7 +71,7 @@ const useStore = create(
         }),
     }),
     {
-      name: "store-storage", // Key name in localStorage
+      name: "store-data", // Key name in localStorage
       storage: createJSONStorage(() => localStorage), // Use localStorage
     }
   )

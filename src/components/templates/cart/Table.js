@@ -14,12 +14,32 @@ const stateOptions = stateData();
 const Table = () => {
   const [discount, setDiscount] = useState("");
   const [totalPrice, setTotalPrice] = useState(0);
-  const [stateSelectedOption, setStateSelectedOption] = useState(null);
   const [changeAddress, setChangeAddress] = useState(false);
 
   const { cart, removeFromCart, addItemToCart } = useStore();
 
+  const [stateSelectedOption, setStateSelectedOption] = useState(null);
+  const [citySelectedOption, setCitySelectedOption] = useState(null);
+  const [citySelectorDisable, setCitySelectorDisable] = useState(true);
+  const [cityOption, setCityOption] = useState([]);
+
   useEffect(calcTotalPrice, [cart]);
+
+  useEffect(() => {
+    setCitySelectedOption(null);
+    if (stateSelectedOption?.value) {
+      const city = stateSelectedOption?.value.map((data) => {
+        return {
+          value: data,
+          label: data,
+        };
+      });
+      setCityOption(city);
+      setCitySelectorDisable(false);
+    } else {
+      setCitySelectorDisable(true);
+    }
+  }, [stateSelectedOption]);
 
   function calcTotalPrice() {
     let price = 0;
@@ -29,10 +49,10 @@ const Table = () => {
         (prev, current) => prev + current.price * current.count,
         0
       );
-      setTotalPrice(price);
+      setTotalPrice(price + 30000);
     }
 
-    setTotalPrice(price);
+    setTotalPrice(price + 30000);
   }
 
   const useDiscount = async () => {
@@ -71,7 +91,6 @@ const Table = () => {
 
   return (
     <>
-      {" "}
       <div className={styles.tabel_container}>
         <table className={styles.table}>
           <thead>
@@ -95,7 +114,7 @@ const Table = () => {
                       }}
                     >
                       -
-                    </span> 
+                    </span>
                     <p>{item.count}</p>
                     <span
                       onClick={() => {
@@ -110,10 +129,7 @@ const Table = () => {
                   {item.price.toLocaleString()} تومان
                 </td>
                 <td className={styles.product}>
-                  <img
-                    src="https://set-coffee.com/wp-content/uploads/2020/12/Red-box-DG--430x430.jpg"
-                    alt=""
-                  />
+                  <img src={item.img} alt="" />
                   <Link href={`/product/${item.id}`}>{item.title}</Link>
                 </td>
 
@@ -130,7 +146,7 @@ const Table = () => {
           </tbody>
         </table>
         <section>
-          <button className={styles.update_btn}> بروزرسانی سبد خرید</button>
+          {/* <button className={styles.update_btn}> بروزرسانی سبد خرید</button> */}
           <div>
             <button onClick={useDiscount} className={styles.set_off_btn}>
               اعمال کوپن
@@ -149,9 +165,25 @@ const Table = () => {
       <div className={totalStyles.totals}>
         <p className={totalStyles.totals_title}>جمع کل سبد خرید</p>
 
-        <div className={totalStyles.subtotal}>
-          <p>جمع جزء </p>
-          <p>205,000 تومان</p>
+        <div
+          style={{ flexDirection: "column" }}
+          className={totalStyles.subtotal}
+        >
+          {cart.map((item, i) => (
+            <span
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+              }}
+              key={i}
+            >
+              <p>{(item.count * item.price).toLocaleString()} تومان</p>
+              <p>
+                {item.title} × {item.count}
+              </p>
+            </span>
+          ))}
         </div>
 
         <p className={totalStyles.motor}>
@@ -179,8 +211,22 @@ const Table = () => {
               isSearchable={true}
               options={stateOptions}
             />
-            <input type="text" placeholder="شهر" />
-            <input type="number" placeholder="کد پستی" />
+            <Select
+              defaultValue={citySelectedOption}
+              onChange={setCitySelectedOption}
+              isDisabled={citySelectorDisable}
+              isClearable={citySelectorDisable}
+              isRtl={true}
+              isSearchable={true}
+              options={cityOption}
+              placeholder={"شهر"}
+            />
+            <input
+              type="text"
+              placeholder="کد پستی"
+              maxLength={16}
+              minLength={16}
+            />
             <button onClick={() => setChangeAddress(false)}>بروزرسانی</button>
           </div>
         )}

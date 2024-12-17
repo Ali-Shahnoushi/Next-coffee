@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import styles from "./product.module.css";
 import { FaRegStar, FaStar } from "react-icons/fa";
@@ -15,6 +17,7 @@ const ProductCard = ({ _id, title, price, score, img }) => {
     id: _id,
     title,
     price,
+    img,
     count: 1,
   };
 

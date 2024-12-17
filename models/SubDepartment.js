@@ -1,4 +1,5 @@
-const { default: mongoose } = require("mongoose");
+const mongoose = require("mongoose");
+
 require('./Department')
 
 const schema = new mongoose.Schema({
@@ -7,7 +8,7 @@ const schema = new mongoose.Schema({
     required: true,
   },
   department: {
-    type: mongoose.Types.ObjectId,
+    type: mongoose.Schema.Types.ObjectId, 
     ref: "Department",
     required: true,
   },

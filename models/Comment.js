@@ -1,4 +1,5 @@
-const { default: mongoose } = require("mongoose");
+const mongoose = require("mongoose");
+
 require("./Product");
 
 const schema = new mongoose.Schema({
@@ -30,7 +31,7 @@ const schema = new mongoose.Schema({
     default: () => Date.now(),
   },
   productID: {
-    type: mongoose.Types.ObjectId,
+    type: mongoose.Schema.Types.ObjectId, 
     ref: "Product",
   },
 });

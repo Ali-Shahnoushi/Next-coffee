@@ -1,4 +1,4 @@
-const { default: mongoose } = require("mongoose");
+const mongoose = require("mongoose");
 require("./Department");
 require("./SubDepartment");
 require("./User");
@@ -14,12 +14,12 @@ const schema = new mongoose.Schema(
       required: true,
     },
     department: {
-      type: mongoose.Types.ObjectId,
+      type: mongoose.Schema.Types.ObjectId,
       ref: "Department",
       required: true,
     },
     subDepartment: {
-      type: mongoose.Types.ObjectId,
+      type: mongoose.Schema.Types.ObjectId,
       ref: "SubDepartment",
     },
     priority: {
@@ -28,7 +28,7 @@ const schema = new mongoose.Schema(
       enum: [1, 2, 3],
     },
     user: {
-      type: mongoose.Types.ObjectId,
+      type: mongoose.Schema.Types.ObjectId,
       ref: "User",
       required: true,
     },
@@ -41,7 +41,7 @@ const schema = new mongoose.Schema(
       default: false,
     },
     mainTicket: {
-      type: mongoose.Types.ObjectId,
+      type: mongoose.Schema.Types.ObjectId,
       ref: "Ticket",
       required: false,
     },

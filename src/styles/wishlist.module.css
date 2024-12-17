@@ -62,5 +62,5 @@
 .container section {
   display: grid;
   gap: 40px;
-  grid-template-columns: auto auto auto;
+  grid-template-columns: 33% 33% 33%;
 }

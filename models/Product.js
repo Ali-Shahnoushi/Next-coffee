@@ -1,4 +1,4 @@
-const { default: mongoose } = require("mongoose");
+const mongoose = require("mongoose");
 
 // import mongoose from "mongoose";
 require("./Comment");
@@ -41,7 +41,7 @@ const schema = new mongoose.Schema({
     default: 5,
   },
   comments: {
-    type: [{ type: mongoose.Types.ObjectId, ref: "Comment" }],
+    type: [{ type: mongoose.Schema.Types.ObjectId, ref: "Comment" }],
     required: true,
   },
   tags: {
