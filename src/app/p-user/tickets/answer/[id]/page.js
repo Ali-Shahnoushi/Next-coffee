@@ -4,31 +4,42 @@ import Link from "next/link";
 import Answer from "@/components/templates/p-user/tickets/Answer";
 import { connectToDB } from "@/configs/db";
 import TicketModel from "@/models/Ticket";
+import messageModel from "@/models/Message";
+import AnswerField from "@/components/templates/p-admin/tickets/AnswerField";
 
 const page = async ({ params }) => {
   const ticketID = params.id;
   connectToDB();
-  const ticket = await TicketModel.findOne({ _id: ticketID }).populate(
-    "user",
-    "name"
-  );
+  const tickets = await messageModel
+    .find({ mainTicket: ticketID })
+    .populate("user mainTicket", "name role")
+    .populate("mainTicket");
 
   const answerTicket = await TicketModel.findOne({
-    mainTicket: ticket._id,
+    mainTicket: tickets[0]._id,
   }).populate("user");
 
   return (
     <Layout>
       <main className={styles.container}>
         <h1 className={styles.title}>
-          <span>{ticket.title}</span>
+          <span>{tickets[0].mainTicket.title}</span>
           <Link href="/p-user/tickets/sendTicket">ارسال تیکت جدید</Link>
         </h1>
 
-        <div>
-          <Answer type="user" {...JSON.parse(JSON.stringify(ticket))} />
+        <div
+          style={{
+            paddingBottom: "100px",
+          }}
+        >
+          {tickets.map((ticket) => (
+            <Answer
+              type={ticket.user.role}
+              {...JSON.parse(JSON.stringify(ticket))}
+            />
+          ))}
 
-          {!answerTicket ? (
+          {/* {!answerTicket ? (
             <div className={styles.empty}>
               <p>هنوز پاسخی دریافت نکردید</p>
             </div>
@@ -37,7 +48,9 @@ const page = async ({ params }) => {
               {...JSON.parse(JSON.stringify(answerTicket))}
               type="admin"
             />
-          )}
+          )} */}
+
+          <AnswerField ticketID={ticketID} />
         </div>
       </main>
     </Layout>

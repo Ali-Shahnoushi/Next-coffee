@@ -9,10 +9,6 @@ const schema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    body: {
-      type: String,
-      required: true,
-    },
     department: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Department",
@@ -31,19 +27,6 @@ const schema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
       required: true,
-    },
-    hasAnswer: {
-      type: Boolean,
-      default: false,
-    },
-    isAnswer: {
-      type: Boolean,
-      default: false,
-    },
-    mainTicket: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Ticket",
-      required: false,
     },
   },
   {

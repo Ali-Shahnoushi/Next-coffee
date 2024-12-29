@@ -1,3 +1,5 @@
+"use client";
+
 import useStore from "@/utils/store";
 import styles from "./topbar.module.css";
 import { IoIosSearch, IoIosNotifications } from "react-icons/io";
@@ -11,7 +13,7 @@ const Topbar = () => {
             <p>{user.name}</p>
             <span>{user.role == "ADMIN" ? "ادمین" : "کاربر"}</span>
           </div>
-          <img src="/images/shahin.jpg" alt="" />
+          <img src="/images/admin.jpg" alt="" />
         </div>
         <section>
           <div className={styles.searchBox}>

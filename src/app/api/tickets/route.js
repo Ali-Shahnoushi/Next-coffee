@@ -1,6 +1,7 @@
 import { authUser } from "@/utils/serverHelpers";
 const { connectToDB } = require("@/configs/db");
 import ticketModel from "@/models/Ticket";
+import messageModel from "@/models/Message";
 
 export async function POST(req) {
   try {
@@ -12,13 +13,19 @@ export async function POST(req) {
 
     // todo validation (me)
 
-    await ticketModel.create({
+    const mainTicket = await ticketModel.create({
       title,
       body,
       department,
       subDepartment,
       priority,
       user: user._id,
+    });
+
+    await messageModel.create({
+      body,
+      user: user._id,
+      mainTicket,
     });
 
     return Response.json(

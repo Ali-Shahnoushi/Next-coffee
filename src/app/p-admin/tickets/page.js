@@ -1,31 +1,22 @@
-import React from "react";
-import AdminPanelLayout from "@/components/layouts/AdminPanelLayout";
-import styles from "@/components/templates/p-admin/tickets/table.module.css";
-import Table from "@/components/templates/p-admin/tickets/Table";
+import Layout from "@/components/layouts/AdminPanelLayout";
+import Tickets from "@/components/templates/p-admin/tickets/Tickets";
+// import connectToDB from "@/configs/db";
+import { authUser } from "@/utils/serverHelpers";
 import TicketModel from "@/models/Ticket";
 import { connectToDB } from "@/configs/db";
 
-async function Page() {
+const page = async () => {
   connectToDB();
-  const tickets = await TicketModel.find({ isAnswer: false })
-    .populate("user department")
-    .sort({ _id: -1 })
+  const tickets = await TicketModel.find({})
+    .populate("department", "title")
+    .sort({ createdAt: "desc" })
     .lean();
 
   return (
-    <AdminPanelLayout>
-      <main>
-        {tickets.length === 0 ? (
-          <p className={styles.empty}>تیکتی وجود ندارد</p>
-        ) : (
-          <Table
-            tickets={JSON.parse(JSON.stringify(tickets))}
-            title="لیست تیکت ها"
-          />
-        )}
-      </main>
-    </AdminPanelLayout>
+    <Layout>
+      <Tickets tickets={JSON.parse(JSON.stringify(tickets))} />
+    </Layout>
   );
-}
+};
 
-export default Page;
+export default page;

@@ -8,6 +8,7 @@ export default function Childrens({ children, user }) {
   const userData = user?.name
     ? {
         name: user.name,
+        id: user._id,
         wishlist: user.wishlist,
         email: user.email,
         phone: user.phone,

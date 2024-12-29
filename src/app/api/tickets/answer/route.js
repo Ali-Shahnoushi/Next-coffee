@@ -1,28 +1,23 @@
 import { connectToDB } from "@/configs/db";
-import TicketModel from "@/models/Ticket";
+import messageModel from "@/models/Message";
 import { authUser } from "@/utils/serverHelpers";
 export async function POST(req) {
   try {
     connectToDB();
 
-    const { title, body, department, subDepartment, priority, ticketID } =
-      await req.json();
+    const { body, ticketID } = await req.json();
 
     const user = await authUser();
 
-    await TicketModel.create({
-      title,
+    await messageModel.create({
       body,
-      department,
-      subDepartment,
-      priority,
       user: user._id,
-      hasAnswer: false,
-      isAnswer: true,
       mainTicket: ticketID,
     });
 
-    await TicketModel.findOneAndUpdate({ _id: ticketID }, { hasAnswer: true });
+    if (!body.trim()) {
+      return Response.json({ message: "invalid data" }, { status: 421 });
+    }
 
     return Response.json(
       { message: "answer sent successfuly!" },
