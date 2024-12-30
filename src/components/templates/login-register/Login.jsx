@@ -5,10 +5,12 @@ import Sms from "./Sms";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { validateEmail } from "@/utils/auth";
+import useStore from "@/utils/store";
 const Login = ({ showRegisterForm }) => {
   const [isLoginWithOPT, setIsLoginWithOPT] = useState(false);
   const [phoneOrEmail, setPhoneOrEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { setUser } = useStore();
   const router = useRouter();
   const hideOPTform = () => setIsLoginWithOPT(false);
 
@@ -34,9 +36,12 @@ const Login = ({ showRegisterForm }) => {
     });
 
     if (res.status === 200) {
+      const data = await res.json();
       setPassword("");
       setPhoneOrEmail("");
       toast.success("با موفقیت وارد شدید");
+
+      setUser(data.data);
       router.push("/");
     }
     if ([422, 419, 401].includes(res.status)) {

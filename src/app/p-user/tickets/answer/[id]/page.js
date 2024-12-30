@@ -29,7 +29,7 @@ const page = async ({ params }) => {
 
         <div
           style={{
-            paddingBottom: "100px",
+            paddingBottom: "150px",
           }}
         >
           {tickets.map((ticket) => (

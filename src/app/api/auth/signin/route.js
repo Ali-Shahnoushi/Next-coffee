@@ -2,12 +2,12 @@ import { connectToDB } from "@/configs/db";
 const {
   validateEmail,
   validatePassword,
-  validatePhone,
   verifyPassword,
   generateAccessToken,
   generateRefreshToken,
 } = require("@/utils/auth");
 import UserModel from "@/models/User";
+import WishlistModel from "@/models/Wishlist";
 import bannedModel from "@/models/Banned";
 import { cookies } from "next/headers";
 
@@ -61,8 +61,23 @@ export async function POST(req) {
     }
 
     await UserModel.findOneAndUpdate({ email }, { $set: { refreshToken } });
+    const userWithoutPass = await UserModel.findOne(
+      { email },
+      "-password -__v -refreshToken"
+    );
+    const userWishlist = await WishlistModel.find({ user: userWithoutPass._id })
+      .populate("product", "title price score img")
+      .lean();
+
+    const userData = userWithoutPass?._doc
+      ? {
+          ...userWithoutPass._doc,
+          userWishlist,
+        }
+      : null;
 
     const headers = new Headers();
+
     headers.append("Set-Cookie", `token=${accessToken};path=/;httpOnly=true;`);
     headers.append(
       "Set-Cookie",
@@ -70,7 +85,7 @@ export async function POST(req) {
     );
 
     return Response.json(
-      { message: "کاربر با موفقیت وارد شد" },
+      { message: "کاربر با موفقیت وارد شد", data: userData },
       {
         status: 200,
         headers,

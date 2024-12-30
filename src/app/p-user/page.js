@@ -4,7 +4,6 @@ import Box from "@/components/templates/p-user/index/Box";
 import Tickets from "@/components/templates/p-user/index/Tickets";
 import Orders from "@/components/templates/p-user/index/Orders";
 import { authUser } from "@/utils/serverHelpers";
-import { redirect } from "next/navigation";
 import ticketModel from "@/models/Ticket";
 import commentModel from "@/models/Comment";
 import wishlistModel from "@/models/Wishlist";

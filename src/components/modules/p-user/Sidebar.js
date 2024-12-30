@@ -1,5 +1,4 @@
 "use client";
-
 import styles from "./sidebar.module.css";
 import { ImHome, ImReply } from "react-icons/im";
 import { FaComments, FaHeart, FaShoppingBag, FaUsers } from "react-icons/fa";
@@ -9,12 +8,12 @@ import { usePathname, useRouter } from "next/navigation";
 import { TbListDetails } from "react-icons/tb";
 import Link from "next/link";
 import swal from "sweetalert";
+import useStore from "@/utils/store";
 
 const Sidebar = () => {
   const path = usePathname();
   const router = useRouter();
-
-  console.log(path);
+  const { setUser, setWishlist, setCart, user } = useStore();
 
   const logoutHandler = () => {
     swal({
@@ -23,6 +22,10 @@ const Sidebar = () => {
       buttons: ["نه", "آره"],
     }).then(async (result) => {
       if (result) {
+        setUser(null);
+        setWishlist([]);
+        setCart([]);
+        localStorage.clear();
         const res = await fetch("/api/auth/signout", {
           method: "POST",
         });
@@ -31,8 +34,9 @@ const Sidebar = () => {
             icon: "success",
             text: "با موفقیت از حساب خود خارج شدید",
             showConfirmButton: false,
+            buttons: [""],
             timer: 1500,
-          }).then(() => router.replace("/"));
+          }).then(() => router.push("/"));
         }
       }
     });
@@ -40,7 +44,7 @@ const Sidebar = () => {
   return (
     <aside className={styles.sidebar}>
       <div className={styles.sidebar_header}>
-        <p>خوش اومدی شاهین عزیز</p>
+        <p>خوش اومدی {user.name} عزیز</p>
       </div>
       <ul className={styles.sidebar_main}>
         {path.includes("/p-user") ? (
