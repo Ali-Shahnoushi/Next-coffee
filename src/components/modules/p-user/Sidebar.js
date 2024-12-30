@@ -44,7 +44,7 @@ const Sidebar = () => {
   return (
     <aside className={styles.sidebar}>
       <div className={styles.sidebar_header}>
-        <p>خوش اومدی {user.name} عزیز</p>
+        <p>خوش اومدی {user?.name} عزیز</p>
       </div>
       <ul className={styles.sidebar_main}>
         {path.includes("/p-user") ? (

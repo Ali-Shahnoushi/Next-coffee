@@ -23,7 +23,7 @@ const Answer = ({ type, body, createdAt, user }) => {
         </div>
       </div>
       <div className={styles.ticket_text}>
-        <p>{body}</p>
+        <p style={{ whiteSpace: "pre-wrap" }}>{body}</p>
       </div>
     </section>
   );

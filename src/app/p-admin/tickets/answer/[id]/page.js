@@ -4,7 +4,6 @@ import Answer from "@/components/templates/p-admin/tickets/Answer";
 import { connectToDB } from "@/configs/db";
 import messageModel from "@/models/Message";
 import AnswerField from "@/components/templates/p-admin/tickets/AnswerField";
-import { revalidatePath } from "next/cache";
 
 const page = async ({ params }) => {
   const ticketID = params.id;

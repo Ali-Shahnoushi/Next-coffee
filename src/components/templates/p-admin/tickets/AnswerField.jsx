@@ -60,6 +60,7 @@ export default function AnswerField({ ticketID }) {
         onClick={sendAnswer}
         style={{
           width: "20%",
+          cursor: "pointer",
           padding: "10px",
           backgroundColor: "#33aa66",
           color: "#fff",

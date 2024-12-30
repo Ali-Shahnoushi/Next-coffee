@@ -1,7 +1,16 @@
 import Link from "next/link";
 import styles from "./ticket.module.css";
+import MessageModel from "@/models/Message";
 
-const Ticket = ({ _id, title, createdAt, department, hasAnswer }) => {
+const Ticket = async ({ _id, title, createdAt, department }) => {
+  const answer = await MessageModel.findOne({ mainTicket: _id })
+    .sort({
+      _id: -1,
+    })
+    .populate("user");
+
+  const hasAnswer = answer.user.role === "ADMIN";
+
   return (
     <Link href={`/p-user/tickets/answer/${_id}`} className={styles.ticket}>
       <div>

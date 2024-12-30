@@ -13,6 +13,8 @@ const page = async () => {
     .sort({ createdAt: "desc" })
     .lean();
 
+  
+
   return (
     <Layout>
       <Tickets tickets={JSON.parse(JSON.stringify(tickets))} />

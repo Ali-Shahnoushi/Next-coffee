@@ -1,12 +1,9 @@
-"use client";
 import React from "react";
 import styles from "@/styles/p-user/tickets.module.css";
 import Link from "next/link";
-// import Box from "@/components/templates/p-user/tickets/box/Box";
 import Ticket from "./Ticket";
 
-function Tickets({ tickets }) {
-
+ function Tickets({ tickets }) {
 
   return (
     <main className={styles.container}>
