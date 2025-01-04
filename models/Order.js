@@ -24,18 +24,18 @@ const schema = new mongoose.Schema(
         },
         price: {
           type: Number,
-          required: true, // Snapshot of the product price at the time of order
+          required: true,
         },
       },
     ],
     discount: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Discount", // Reference to the Discount model
+      ref: "Discount",
       required: false,
     },
     totalAmount: {
       type: Number,
-      required: true, // Total amount after applying discounts
+      required: true,
     },
     status: {
       type: String,
@@ -46,35 +46,45 @@ const schema = new mongoose.Schema(
       type: String,
       default: "CREDIT_CARD",
     },
-    shippingAddress: {
-      fullName: {
-        type: String,
-        required: true,
-      },
-      phone: {
-        type: String,
-        required: true,
-      },
-      address: {
-        type: String,
-        required: true,
-      },
-      city: {
-        type: String,
-        required: true,
-      },
-      postalCode: {
-        type: String,
-        required: true,
-      },
-      country: {
-        type: String,
-        default: "IRAN",
-      },
+    firstname: {
+      type: String,
+      required: true,
+    },
+    lastname: {
+      type: String,
+      required: true,
+    },
+    phone: {
+      type: String,
+      required: true,
+    },
+    address: {
+      type: String,
+      required: true,
+    },
+    state: {
+      type: String,
+      required: true,
+    },
+    city: {
+      type: String,
+      required: true,
+    },
+    postalCode: {
+      type: String,
+      required: true,
+    },
+    country: {
+      type: String,
+      default: "IRAN",
+    },
+    note: {
+      type: String,
+      required: false,
     },
   },
   {
-    timestamps: true, // Automatically add createdAt and updatedAt fields
+    timestamps: true,
   }
 );
 

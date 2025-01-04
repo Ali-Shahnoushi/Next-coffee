@@ -2,15 +2,13 @@ import Footer from "@/components/modules/footer/Footer";
 import Navbar from "@/components/modules/navbar/Navbar";
 import Stepper from "@/components/modules/stepper/Stepper";
 import styles from "@/styles/checkout.module.css";
-import Order from "@/components/templates/checkout/order/Order";
-import Details from "@/components/templates/checkout/details/Details";
 import { authUser } from "@/utils/serverHelpers";
 import Link from "next/link";
 import stylesDetail from "@/components/templates/checkout/details/details.module.css";
+import OrderAndDetails from "@/components/templates/checkout/OrderAndDetails";
 
 const page = async () => {
   const user = await authUser();
-  console.log(user);
 
   return (
     <>
@@ -20,8 +18,7 @@ const page = async () => {
         <main className={styles.checkout}>
           {user ? (
             <>
-              <Order />
-              <Details />
+              <OrderAndDetails />
             </>
           ) : (
             <div
@@ -50,6 +47,7 @@ const page = async () => {
                     style={{
                       color: "#5e5e5e",
                     }}
+                    r
                   >
                     برای ثبت سفارش ابتدا وارد شوید
                   </p>

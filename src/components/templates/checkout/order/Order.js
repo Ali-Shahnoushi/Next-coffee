@@ -3,8 +3,7 @@ import { useState } from "react";
 import styles from "./order.module.css";
 import Link from "next/link";
 
-const Order = () => {
-  const [showZarinPallAlert, setShowZarinPallAlert] = useState(false);
+const Order = ({ orderData }) => {
   return (
     <div className={styles.order}>
       <p className={styles.title}>سفارش شما</p>
@@ -42,12 +41,7 @@ const Order = () => {
       </main>
       <div className={styles.transaction}>
         <div>
-          <input
-            onClick={() => setShowZarinPallAlert(false)}
-            type="radio"
-            name="payment_method"
-            value="melli"
-          />
+          <input type="radio" name="payment_method" value="melli" />
           <label> بانک ملی</label>
           <img
             width={24}
@@ -57,12 +51,7 @@ const Order = () => {
           ></img>
         </div>
         <div>
-          <input
-            onClick={() => setShowZarinPallAlert(true)}
-            type="radio"
-            name="payment_method"
-            value="zarinpal"
-          />
+          <input type="radio" name="payment_method" value="zarinpal" />
           <label>پرداخت امن زرین پال </label>
           <img
             width={40}
@@ -71,13 +60,11 @@ const Order = () => {
             alt="زرین پال"
           ></img>
         </div>
-        {showZarinPallAlert && (
-          <div className={styles.paymentBox}>
-            <p>
-              پرداخت امن به وسیله کلیه کارت های عضو شتاب از طریق درگاه زرین پال
-            </p>
-          </div>
-        )}
+        <div className={styles.paymentBox}>
+          <p>
+            پرداخت امن به وسیله کلیه کارت های عضو شتاب از طریق درگاه زرین پال
+          </p>
+        </div>
         <div className={styles.warning}>
           <p>
             اطلاعات شخصی شما برای پردازش سفارش و پشتیبانی از تجربه شما در این
