@@ -15,7 +15,7 @@ const authUser = async () => {
     if (tokenPayload) {
       user = await UserModel.findOne(
         { email: tokenPayload.email },
-        "-password -__v -refreshToken"
+        "-password -__v"
       );
       wishlist = await WishlistModel.find({ user: user._id })
         .populate("product", "title price score img")
