@@ -86,7 +86,6 @@ const Table = () => {
       const discountCode = await res.json();
       const newPrice = totalPrice - (totalPrice * discountCode.percent) / 100;
       setTotalPrice(newPrice);
-      console.log(discountCode._id);
 
       setDiscount(discountCode);
       return swal({

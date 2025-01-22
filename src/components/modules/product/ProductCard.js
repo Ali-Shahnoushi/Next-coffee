@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import styles from "./product.module.css";
-import { FaRegStar, FaStar } from "react-icons/fa";
+import { FaRegStar, FaStar, FaHeart } from "react-icons/fa";
 import { CiSearch, CiHeart } from "react-icons/ci";
 import useStore from "@/utils/store";
 import swal from "sweetalert";
@@ -11,7 +11,8 @@ const ProductCard = ({ _id, title, price, score, img }) => {
   const validScore =
     typeof score === "number" && score >= 1 && score <= 5 ? score : 1;
 
-  const { addItemToCart } = useStore();
+  const { addItemToCart, addToWishlist, removeFromWishlist, wishlist } =
+    useStore();
 
   const cartItem = {
     id: _id,
@@ -37,8 +38,36 @@ const ProductCard = ({ _id, title, price, score, img }) => {
               <CiSearch />
               <p className={styles.tooltip}>مشاهده سریع</p>
             </span>
-            <div>
-              <CiHeart />
+            <div
+              onClick={async (e) => {
+                e.preventDefault();
+                const exist = wishlist.some((product) => product._id === _id);
+                if (!exist) {
+                  await addToWishlist({ _id, title, price, score, img });
+                  swal({
+                    icon: "success",
+                    timer: 1500,
+                    text: "محصول به علاقه‌مندی شما افزوده شد",
+                    showConfirmButton: false,
+                    buttons: [""],
+                  });
+                } else {
+                  swal({
+                    icon: "success",
+                    timer: 1500,
+                    text: "محصول از علاقه‌مندی های شما حذف شد",
+                    showConfirmButton: false,
+                    buttons: [""],
+                  });
+                  removeFromWishlist(_id);
+                }
+              }}
+            >
+              {wishlist.some((product) => product._id === _id) ? (
+                <FaHeart size={24} color="#f66" />
+              ) : (
+                <CiHeart />
+              )}
               <p className={styles.tooltip}>افزودن به علاقه مندی ها </p>
             </div>
           </div>
