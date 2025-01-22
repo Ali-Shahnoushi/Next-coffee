@@ -11,7 +11,7 @@ const Topbar = () => {
         <div className={styles.profile}>
           <div>
             <p>{user?.name}</p>
-            <span>{user.role == "ADMIN" ? "ادمین" : "کاربر"}</span>
+            <span>{user?.role == "ADMIN" ? "ادمین" : "کاربر"}</span>
           </div>
           <img src="/images/admin.jpg" alt="" />
         </div>

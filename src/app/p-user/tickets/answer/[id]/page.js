@@ -15,10 +15,6 @@ const page = async ({ params }) => {
     .populate("user mainTicket", "name role")
     .populate("mainTicket");
 
-  const answerTicket = await TicketModel.findOne({
-    mainTicket: tickets[0]._id,
-  }).populate("user");
-
   return (
     <Layout>
       <main className={styles.container}>
@@ -38,19 +34,26 @@ const page = async ({ params }) => {
               {...JSON.parse(JSON.stringify(ticket))}
             />
           ))}
-
-          {/* {!answerTicket ? (
-            <div className={styles.empty}>
-              <p>هنوز پاسخی دریافت نکردید</p>
-            </div>
+          {tickets[0].mainTicket.status === "OPEN" ? (
+            <AnswerField ticketID={ticketID} />
           ) : (
-            <Answer
-              {...JSON.parse(JSON.stringify(answerTicket))}
-              type="admin"
-            />
-          )} */}
-
-          <AnswerField ticketID={ticketID} />
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                position: "fixed",
+                bottom: "0px",
+                width: "77%",
+                fontSize: "18px",
+                color: "#fff",
+                padding: "12px 0",
+                backgroundColor: "#0c6",
+              }}
+            >
+              این تیکت بسته شده است
+            </div>
+          )}
         </div>
       </main>
     </Layout>

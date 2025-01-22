@@ -6,13 +6,28 @@ import { FaRegStar, FaStar, FaHeart } from "react-icons/fa";
 import { CiSearch, CiHeart } from "react-icons/ci";
 import useStore from "@/utils/store";
 import swal from "sweetalert";
+import { useEffect, useState } from "react";
 
 const ProductCard = ({ _id, title, price, score, img }) => {
   const validScore =
     typeof score === "number" && score >= 1 && score <= 5 ? score : 1;
 
+  let wishlists = [];
+
   const { addItemToCart, addToWishlist, removeFromWishlist, wishlist } =
     useStore();
+
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  useEffect(() => {
+    if (isClient) {
+      wishlists = wishlist;
+    }
+  }, [isClient]);
 
   const cartItem = {
     id: _id,
@@ -41,16 +56,16 @@ const ProductCard = ({ _id, title, price, score, img }) => {
             <div
               onClick={async (e) => {
                 e.preventDefault();
-                const exist = wishlist.some((product) => product._id === _id);
+                const exist = wishlists.some((product) => product._id === _id);
                 if (!exist) {
                   await addToWishlist({ _id, title, price, score, img });
-                  swal({
-                    icon: "success",
-                    timer: 1500,
-                    text: "محصول به علاقه‌مندی شما افزوده شد",
-                    showConfirmButton: false,
-                    buttons: [""],
-                  });
+                    swal({
+                      icon: "success",
+                      timer: 1500,
+                      text: "محصول به علاقه‌مندی شما افزوده شد",
+                      showConfirmButton: false,
+                      buttons: [""],
+                    });
                 } else {
                   swal({
                     icon: "success",
@@ -63,7 +78,7 @@ const ProductCard = ({ _id, title, price, score, img }) => {
                 }
               }}
             >
-              {wishlist.some((product) => product._id === _id) ? (
+              {wishlists.some((product) => product._id === _id) ? (
                 <FaHeart size={24} color="#f66" />
               ) : (
                 <CiHeart />

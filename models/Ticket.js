@@ -18,8 +18,13 @@ const schema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "SubDepartment",
     },
+    status: {
+      type: String,
+      default: "OPEN",
+      enum: ["OPEN", "CLOSED"],
+    },
     priority: {
-      type: Number,
+      type: String,
       default: 1,
       enum: [1, 2, 3],
     },

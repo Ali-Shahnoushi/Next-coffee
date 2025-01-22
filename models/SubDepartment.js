@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-require('./Department')
+require("./Department");
 
 const schema = new mongoose.Schema({
   title: {
@@ -8,7 +8,7 @@ const schema = new mongoose.Schema({
     required: true,
   },
   department: {
-    type: mongoose.Schema.Types.ObjectId, 
+    type: mongoose.Schema.Types.ObjectId,
     ref: "Department",
     required: true,
   },
