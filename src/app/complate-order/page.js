@@ -43,11 +43,7 @@ const page = async () => {
             <li>روش پرداخت: بانک ملی</li>
           </ul>
           <div>
-<<<<<<< HEAD
-            <PayOrder />
-=======
             <PayOrder lastOrder={JSON.parse(JSON.stringify(lastOrder))} />
->>>>>>> 85628159c6abd6d530540a3f7202dcdd5bf9ce01
             <Link href={"/checkout"}>
               <button className={styles.cancel}> بازگشت</button>{" "}
             </Link>

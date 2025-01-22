@@ -1,10 +1,7 @@
 import { connectToDB } from "@/configs/db";
 import OrderModel from "@/models/Order";
 import ProductModel from "@/models/Product";
-<<<<<<< HEAD
-=======
 import DiscountModel from "@/models/Discount";
->>>>>>> 85628159c6abd6d530540a3f7202dcdd5bf9ce01
 import { authUser } from "@/utils/serverHelpers";
 
 export async function POST(req) {
@@ -104,12 +101,6 @@ export async function POST(req) {
       );
     }
 
-    // const totalPrice = products.reduce((sum, product) => {
-    //   return sum + product.price * product.count;
-    // }, 0);
-
-<<<<<<< HEAD
-=======
     if (discount) {
       const discountData = await DiscountModel.findById(discount);
       const totalPriceDiscount =
@@ -139,7 +130,6 @@ export async function POST(req) {
       );
     }
 
->>>>>>> 85628159c6abd6d530540a3f7202dcdd5bf9ce01
     const newOrder = await OrderModel.create({
       user: user._id,
       products: validatedProducts,
