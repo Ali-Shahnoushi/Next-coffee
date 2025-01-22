@@ -5,30 +5,33 @@ const Stepper = ({ step }) => {
   return (
     <div className={styles.stepper_bg}>
       <div className={styles.stepper}>
-        <Link className={step == "cart" && styles.active_step} href={"/cart"}>
+        <Link
+          className={step === "cart" ? styles.active_step : ""}
+          href={"/cart"}
+        >
           سبد خرید
         </Link>
         <FaArrowLeftLong />
         {step === "checkout" || step === "complate" ? (
           <Link
-            className={step == "checkout" && styles.active_step}
+            className={step === "checkout" ? styles.active_step : ""}
             href={"/checkout"}
           >
-            پرداخت
+            ثبت سفارش
           </Link>
         ) : (
           <p>پرداخت</p>
         )}
         <FaArrowLeftLong />
-        {step == "complate" ? (
+        {step === "complate" ? (
           <Link
-            className={step == "complate" && styles.active_step}
-            href={"/complate"}
+            className={step === "complate" ? styles.active_step : ""}
+            href={"/complate-order"}
           >
-            تکمیل سفارش
+            پرداخت
           </Link>
         ) : (
-          <p> تکمیل سفارش</p>
+          <p> پرداخت</p>
         )}
       </div>
     </div>

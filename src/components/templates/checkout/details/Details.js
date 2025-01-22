@@ -3,13 +3,22 @@ import stateData from "@/utils/stateData";
 import styles from "./details.module.css";
 import Select from "react-select";
 import { useEffect, useState } from "react";
+import useStore from "@/utils/store";
 
 const stateOptions = stateData();
-const Details = () => {
+const Details = ({ callback }) => {
   const [stateSelectedOption, setStateSelectedOption] = useState(null);
   const [citySelectedOption, setCitySelectedOption] = useState(null);
   const [citySelectorDisabel, setCitySelectorDisabel] = useState(true);
   const [cityOption, setCityOption] = useState([]);
+  const [lastname, setLastname] = useState("");
+  const [firstname, setFirstname] = useState("");
+  const [address, setAddress] = useState("");
+  const [postalCode, setPostalCode] = useState("");
+  const [phone, setPhone] = useState("");
+  const [note, setNote] = useState(null);
+
+  const { user, cart, discount } = useStore();
 
   useEffect(() => {
     setCitySelectedOption(null);
@@ -25,6 +34,38 @@ const Details = () => {
     }
   }, [stateSelectedOption]);
 
+  async function setDetails() {
+    if (
+      stateSelectedOption.trim() &&
+      citySelectedOption.trim() &&
+      lastname.trim() &&
+      firstname.trim() &&
+      address.trim() &&
+      postalCode.trim() &&
+      phone.trim() &&
+      note.trim()
+    ) {
+      const orderInfos = {
+        user: user.id,
+        products: cart.map(({ count, id, price }) => ({
+          quantity: count,
+          product: id,
+          price,
+        })),
+        firstname,
+        lastname,
+        phone,
+        address,
+        state,
+        city,
+        postalCode,
+        discount,
+        note,
+      };
+      callback(orderInfos);
+    }
+  }
+
   return (
     <div className={styles.details}>
       <p className={styles.details_title}>جزئیات صورتحساب</p>
@@ -35,13 +76,21 @@ const Details = () => {
             <label>
               نام خانوادگی <span>*</span>
             </label>
-            <input type="text" />
+            <input
+              value={lastname}
+              onChange={(e) => setLastname(e.target.value)}
+              type="text"
+            />
           </div>
           <div className={styles.group}>
             <label>
               نام <span>*</span>
             </label>
-            <input type="text" />
+            <input
+              value={firstname}
+              onChange={(e) => setFirstname(e.target.value)}
+              type="text"
+            />
           </div>
         </div>
         <div className={styles.group}>
@@ -75,33 +124,44 @@ const Details = () => {
         </div>
         <div className={styles.group}>
           <label>
-            آدرس خیابان<span>*</span>
+            آدرس<span>*</span>
           </label>
-          <input type="text" />
+          <textarea
+            value={address}
+            onChange={(e) => setAddress(e.target.value)}
+            cols="30"
+            rows="8"
+            placeholder="آدرس را بنویسید"
+          ></textarea>
         </div>
         <div className={styles.group}>
           <label>
             کدپستی (بدون فاصله)<span>*</span>
           </label>
-          <input type="text" minLength={16} maxLength={16} />
+          <input
+            value={postalCode}
+            onChange={(e) => setPostalCode(e.target.value)}
+            type="text"
+            minLength={16}
+            maxLength={16}
+          />
         </div>
         <div className={styles.group}>
           <label>
             شماره موبایل <span>*</span>
           </label>
-          <input type="text" />
-        </div>
-
-        <div className={styles.group}>
-          <label>
-            ایمیل <span>*</span>
-          </label>
-          <input type="email" />
+          <input
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
+            type="text"
+          />
         </div>
 
         <div className={styles.destination}>
           <label>توضیحات سفارش (اختیاری) </label>
           <textarea
+            value={note}
+            onChange={(e) => setNote(e.target.value)}
             cols="30"
             rows="8"
             placeholder="اگر توضیحی در مورد سفارش خود دارید در اینجا ثبت کنید"

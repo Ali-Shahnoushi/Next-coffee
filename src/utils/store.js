@@ -7,6 +7,8 @@ const useStore = create(
       user: null,
       wishlist: [],
       cart: [],
+      discount: null,
+      setDiscount: (discount) => set({ discount }),
       setUser: (user) => set({ user }),
       setWishlist: (wishlist) => set({ wishlist }),
       addToWishlist: (product) =>

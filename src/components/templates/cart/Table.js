@@ -12,12 +12,14 @@ import useStore from "@/utils/store";
 const stateOptions = stateData();
 
 const Table = () => {
-  const [discount, setDiscount] = useState("");
+  const { cart, removeFromCart, addItemToCart, setDiscount, discount } =
+    useStore();
+
+  const [discountValue, setDiscountValue] = useState(
+    discount ? discount.code : ""
+  );
   const [totalPrice, setTotalPrice] = useState(0);
   const [changeAddress, setChangeAddress] = useState(false);
-
-  const { cart, removeFromCart, addItemToCart } = useStore();
-
   const [stateSelectedOption, setStateSelectedOption] = useState(null);
   const [citySelectedOption, setCitySelectedOption] = useState(null);
   const [citySelectorDisable, setCitySelectorDisable] = useState(true);
@@ -49,19 +51,17 @@ const Table = () => {
         (prev, current) => prev + current.price * current.count,
         0
       );
-      setTotalPrice(price + 30000);
+      setTotalPrice(price + 30000 + (price * 10) / 100);
     }
-
-    setTotalPrice(price + 30000);
   }
 
-  const useDiscount = async () => {
+  async function useDiscount() {
     const res = await fetch("/api/discounts/use", {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ code: discount }),
+      body: JSON.stringify({ code: discountValue }),
     });
 
     if (res.status === 404) {
@@ -80,6 +80,9 @@ const Table = () => {
       const discountCode = await res.json();
       const newPrice = totalPrice - (totalPrice * discountCode.percent) / 100;
       setTotalPrice(newPrice);
+      console.log(discountCode._id);
+
+      setDiscount(discountCode);
       return swal({
         buttons: [""],
         timer: 1500,
@@ -87,7 +90,7 @@ const Table = () => {
         text: "کد تخفیف با موفقیت اعمال شد",
       });
     }
-  };
+  }
 
   return (
     <>
@@ -105,7 +108,7 @@ const Table = () => {
           <tbody>
             {cart.map((item, i) => (
               <tr key={i}>
-                <td>{(item.count * item.price).toLocaleString()} تومان</td>
+                <td>{item.price.toLocaleString()} تومان</td>
                 <td className={styles.counter}>
                   <div>
                     <span
@@ -146,19 +149,33 @@ const Table = () => {
           </tbody>
         </table>
         <section>
-          {/* <button className={styles.update_btn}> بروزرسانی سبد خرید</button> */}
           <div>
-            <button onClick={useDiscount} className={styles.set_off_btn}>
+            <button
+              disabled={discount ? discount.code : false}
+              onClick={useDiscount}
+              className={styles.set_off_btn}
+            >
               اعمال کوپن
             </button>
             <input
               type="text"
-              value={discount}
+              value={discountValue}
               onChange={(e) => {
-                setDiscount(e.target.value);
+                setDiscountValue(e.target.value);
               }}
               placeholder="کد تخفیف"
             />
+            <button
+              style={{ backgroundColor: "#d44" }}
+              onClick={() => {
+                setDiscount(null);
+                setDiscountValue("");
+                calcTotalPrice();
+              }}
+              className={styles.set_off_btn}
+            >
+              حذف کوپن
+            </button>
           </div>
         </section>
       </div>
