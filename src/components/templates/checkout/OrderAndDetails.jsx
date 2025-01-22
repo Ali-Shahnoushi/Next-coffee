@@ -41,10 +41,13 @@ export default function OrderAndDetails() {
 
   useEffect(() => {
     if (isClient && cart.length === 0) router.push("/cart");
+<<<<<<< HEAD
     if (isClient) {
       console.log(cart);
       console.log(discount);
     }
+=======
+>>>>>>> 85628159c6abd6d530540a3f7202dcdd5bf9ce01
   }, [isClient]);
 
   function calcTotalPrice() {
@@ -55,7 +58,10 @@ export default function OrderAndDetails() {
         (prev, current) => prev + current.price * current.count,
         0
       );
+<<<<<<< HEAD
       price = price + 30000 + (price * 10) / 100;
+=======
+>>>>>>> 85628159c6abd6d530540a3f7202dcdd5bf9ce01
     }
 
     return price;
@@ -158,15 +164,54 @@ export default function OrderAndDetails() {
               </span>
             ))}
           </div>
+<<<<<<< HEAD
+=======
+          {discount && (
+            <div>
+              <p>
+                <strong>
+                  {" "}
+                  {(
+                    (calcTotalPrice() * discount.percent) /
+                    100
+                  ).toLocaleString()}{" "}
+                  تومان
+                </strong>
+              </p>
+              <p>تخفیف</p>
+            </div>
+          )}
+>>>>>>> 85628159c6abd6d530540a3f7202dcdd5bf9ce01
           <div>
             <p>
               پیک موتوری: <strong> 30,000 تومان</strong>
             </p>
             <p>حمل و نقل</p>
           </div>
+<<<<<<< HEAD
           <div>
             <div>
               <h2>{calcTotalPrice().toLocaleString()} تومان</h2>
+=======
+
+          <div>
+            <div>
+              <h2>
+                {discount
+                  ? (
+                      calcTotalPrice() -
+                      (calcTotalPrice() * discount.percent) / 100 +
+                      (10 * calcTotalPrice() * discount.percent) / 100 / 100 +
+                      30000
+                    ).toLocaleString()
+                  : (
+                      calcTotalPrice() +
+                      (10 * calcTotalPrice()) / 100 +
+                      30000
+                    ).toLocaleString()}
+                تومان
+              </h2>
+>>>>>>> 85628159c6abd6d530540a3f7202dcdd5bf9ce01
               <p>
                 (شامل <strong>۱۰ ٪</strong> ارزش افزوده)
               </p>

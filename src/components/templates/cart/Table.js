@@ -51,7 +51,11 @@ const Table = () => {
         (prev, current) => prev + current.price * current.count,
         0
       );
+<<<<<<< HEAD
       setTotalPrice(price + 30000 + (price * 10) / 100);
+=======
+      setTotalPrice(price);
+>>>>>>> 85628159c6abd6d530540a3f7202dcdd5bf9ce01
     }
   }
 
@@ -75,6 +79,12 @@ const Table = () => {
         buttons: ["تلاش مجدد"],
         icon: "error",
         text: "کد تخفیف وارد شده منقضی شده",
+      });
+    } else if (res.status === 423) {
+      return swal({
+        buttons: ["تلاش مجدد"],
+        icon: "error",
+        text: "کد تخفیف وارد شده قبلا استفاده شده",
       });
     } else if (res.status === 200) {
       const discountCode = await res.json();

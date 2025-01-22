@@ -1,15 +1,15 @@
 import { connectToDB } from "@/configs/db";
-import { cookies } from "next/headers";
 import UserModel from "@/models/User";
-import { generateAccessToken } from "@/utils/auth";
+import { generateAccessToken, verifyToken } from "@/utils/auth";
 // Use (You)
 
 // Tickets -> Status 401 -> Req /auth/Refresh -> 200, 401 -> /login-register
 
-export async function POST() {
+export async function POST(req) {
   try {
     connectToDB();
-    const refreshToken = cookies().get("refresh-token").value;
+
+    const { refreshToken } = await req.json();
 
     if (!refreshToken) {
       return Response.json(
@@ -27,11 +27,11 @@ export async function POST() {
       );
     }
 
-    verify(refreshToken, process.env.RefreshTokenSecretKey);
+    verifyToken(refreshToken, process.env.RefreshTokenSecretKey);
     const newAccessToken = generateAccessToken({ email: user.email });
 
     return Response.json(
-      { message: "new access token generated successfully :))" },
+      { message: "Access token refreshed." },
       {
         status: 200,
         headers: {
@@ -40,6 +40,11 @@ export async function POST() {
       }
     );
   } catch (err) {
-    return Response.json({ message: err.message }, { status: 500 });
+    console.log(err);
+
+    return Response.json(
+      { message: "Invalid or expired refresh token" },
+      { status: 403 }
+    );
   }
 }

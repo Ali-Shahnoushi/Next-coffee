@@ -79,10 +79,6 @@ export async function POST(req) {
     const headers = new Headers();
 
     headers.append("Set-Cookie", `token=${accessToken};path=/;httpOnly=true;`);
-    headers.append(
-      "Set-Cookie",
-      `refresh-token=${refreshToken};path=/;httpOnly=true;`
-    );
 
     return Response.json(
       { message: "کاربر با موفقیت وارد شد", data: userData },

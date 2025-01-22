@@ -21,11 +21,21 @@ export default function Childrens({ children, user }) {
       (wishlist) => wishlist.product
     );
 
-    // const cart = JSON.parse(localStorage.getItem("cart")) || [];
-
-    // setCart(cart);
-
     setWishlist(allWishlistProducts);
+
+    const refreshInterval = setInterval(async () => {
+      const res = await fetch("/api/auth/refresh", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ refreshToken: user?.refreshToken }),
+      });
+
+      if (res.status !== 200) {
+        console.error("Failed to refresh access token");
+      }
+    }, 60 * 55 * 1000); // Refresh every 1 hour
+
+    return () => clearInterval(refreshInterval);
   }, []);
 
   return <>{children}</>;

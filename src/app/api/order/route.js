@@ -1,6 +1,10 @@
 import { connectToDB } from "@/configs/db";
 import OrderModel from "@/models/Order";
 import ProductModel from "@/models/Product";
+<<<<<<< HEAD
+=======
+import DiscountModel from "@/models/Discount";
+>>>>>>> 85628159c6abd6d530540a3f7202dcdd5bf9ce01
 import { authUser } from "@/utils/serverHelpers";
 
 export async function POST(req) {
@@ -104,6 +108,38 @@ export async function POST(req) {
     //   return sum + product.price * product.count;
     // }, 0);
 
+<<<<<<< HEAD
+=======
+    if (discount) {
+      const discountData = await DiscountModel.findById(discount);
+      const totalPriceDiscount =
+        totalPrice -
+        (totalPrice * discountData.percent) / 100 +
+        (((totalPrice * discountData.percent) / 100) * 10) / 100 +
+        30_000;
+
+      const newOrder = await OrderModel.create({
+        user: user._id,
+        products: validatedProducts,
+        totalAmount: totalPriceDiscount,
+        firstname,
+        lastname,
+        phone,
+        address,
+        state,
+        city,
+        postalCode,
+        discount,
+        note,
+      });
+
+      return Response.json(
+        { message: "order created successfully.", order: newOrder },
+        { status: 201 }
+      );
+    }
+
+>>>>>>> 85628159c6abd6d530540a3f7202dcdd5bf9ce01
     const newOrder = await OrderModel.create({
       user: user._id,
       products: validatedProducts,

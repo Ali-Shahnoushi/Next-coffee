@@ -11,7 +11,7 @@ export default async function Home() {
 
   return (
     <>
-      <Navbar/>
+      <Navbar />
       <Banner />
       <Latest products={JSON.parse(JSON.stringify(latestProducts))} />
       <Promote />
