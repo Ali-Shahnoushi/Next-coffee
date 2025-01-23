@@ -10,7 +10,7 @@ const Login = ({ showRegisterForm }) => {
   const [isLoginWithOPT, setIsLoginWithOPT] = useState(false);
   const [phoneOrEmail, setPhoneOrEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { setUser } = useStore();
+  const { setUser, setWishlist } = useStore();
   const router = useRouter();
   const hideOPTform = () => setIsLoginWithOPT(false);
 
@@ -41,7 +41,10 @@ const Login = ({ showRegisterForm }) => {
       setPhoneOrEmail("");
       toast.success("با موفقیت وارد شدید");
 
+      console.log("---------------------- data", data);
+
       setUser(data.data);
+      setWishlist(data.data.userWishlist);
       router.push("/");
     }
     if ([422, 419, 401].includes(res.status)) {

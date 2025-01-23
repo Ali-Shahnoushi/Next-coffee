@@ -75,7 +75,7 @@ export default function AddToWishlist({ productID }) {
   useEffect(() => {
     if (isClient) {
       setIsLiked(
-        wishlist.some((product) => product?._id === String(productID))
+        wishlist?.some((product) => product?._id === String(productID))
       );
     }
   }, [isClient, wishlist, productID]);

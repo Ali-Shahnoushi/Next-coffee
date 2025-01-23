@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   CartesianGrid,
   Line,
@@ -12,7 +12,19 @@ import {
 } from "recharts";
 
 export default function GrowthChart() {
-  const data = [
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    const getMonthlySale = async () => {
+      const res = await fetch("api/order");
+      const data = await res.json();
+
+      setData(data.lastAndCurrentMonthSales);
+    };
+    getMonthlySale();
+  }, []);
+  console.log(data);
+
+  const oldData = [
     { date: "02/12/1", current: 500_000, prev: 430_000 },
     { date: "02/30/4", current: 800_000, prev: 820_000 },
     { date: "02/18/11", current: 20_000, prev: 8_500 },
@@ -32,8 +44,7 @@ export default function GrowthChart() {
         <XAxis dataKey="date" />
         <YAxis />
         <Tooltip />
-        <Line type="monotone" dataKey="prev" stroke="#2d2b2b" />
-        <Line type="monotone" dataKey="current" stroke="#000" />
+        <Line type="monotone" dataKey="sale" stroke="#2d994c" />
       </LineChart>
     </ResponsiveContainer>
   );

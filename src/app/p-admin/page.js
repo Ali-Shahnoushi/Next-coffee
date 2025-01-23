@@ -7,6 +7,7 @@ import Box from "@/components/modules/infoBox/InfoBox";
 import TicketModel from "@/models/Ticket";
 import UserModel from "@/models/User";
 import ProductModel from "@/models/Product";
+import OrderModel from "@/models/Order";
 import { connectToDB } from "@/configs/db";
 import SaleChart from "@/components/templates/p-admin/index/SaleChart";
 import GrowthChart from "@/components/templates/p-admin/index/GrowthChart";
@@ -15,6 +16,7 @@ async function AdminHomePage() {
   connectToDB();
   const tickets = await TicketModel.find({}).lean();
   const users = await UserModel.find({}).lean();
+  const orders = await OrderModel.find({}).lean();
   const products = await ProductModel.find({}).lean();
 
   return (
@@ -23,16 +25,16 @@ async function AdminHomePage() {
         <section className={styles.dashboard_contents}>
           <Box title="مجموع تیکت های دریافتی" value={tickets.length} />
           <Box title="مجموع محصولات سایت" value={products.length} />
-          <Box title="مجموع سفارشات" value="333" />
+          <Box title="مجموع سفارشات" value={orders.length} />
           <Box title="مجموع کاربر های سایت" value={users.length} />
         </section>{" "}
         <div className={styles.dashboard_charts}>
           <section>
-            <p>آمار فروش</p>
+            <p>آمار فروش امسال</p>
             <SaleChart />
           </section>
           <section>
-            <p>نرخ رشد</p>
+            <p>نرخ رشد ماه اخیر</p>
             <GrowthChart />
           </section>
         </div>

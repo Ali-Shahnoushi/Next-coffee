@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Area,
   AreaChart,
@@ -12,13 +12,16 @@ import {
 } from "recharts";
 
 export default function SaleChart() {
-  const data = [
-    { date: "02/01/1", sale: 500_000 },
-    { date: "02/04/4", sale: 800_000 },
-    { date: "02/08/11", sale: 20_000 },
-    { date: "02/12/8", sale: 1_500_000 },
-    { date: "02/03/6", sale: 453_000 },
-  ];
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    const getMonthlySale = async () => {
+      const res = await fetch("api/order");
+      const data = await res.json();
+
+      setData(data.monthlySalesFormatted);
+    };
+    getMonthlySale();
+  }, []);
 
   return (
     <ResponsiveContainer width="100%" height="90%">
@@ -32,7 +35,7 @@ export default function SaleChart() {
         <XAxis dataKey="date" />
         <YAxis />
         <Tooltip />
-        <Area type="monotone" dataKey="sale" stroke="#000" fill="#2d2b2b" />
+        <Area type="monotone" dataKey="sale" stroke="#003275" fill="#2b72d0" />
       </AreaChart>
     </ResponsiveContainer>
   );

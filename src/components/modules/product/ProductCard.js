@@ -37,28 +37,31 @@ const ProductCard = ({ _id, title, price, score, img }) => {
     count: 1,
   };
 
-  return (
-    <Link href={`/product/${_id}`}>
-      <div className={styles.card}>
-        <div className={styles.details_container}>
-          <img
-            src={
-              img ||
-              "https://set-coffee.com/wp-content/uploads/2021/10/041-430x430.png"
-            }
-            alt=""
-          />{" "}
-          <div className={styles.icons}>
-            <span>
-              <CiSearch />
-              <p className={styles.tooltip}>مشاهده سریع</p>
-            </span>
-            <div
-              onClick={async (e) => {
-                e.preventDefault();
-                const exist = wishlists.some((product) => product._id === _id);
-                if (!exist) {
-                  await addToWishlist({ _id, title, price, score, img });
+  if (isClient)
+    return (
+      <Link href={`/product/${_id}`}>
+        <div className={styles.card}>
+          <div className={styles.details_container}>
+            <img
+              src={
+                img ||
+                "https://set-coffee.com/wp-content/uploads/2021/10/041-430x430.png"
+              }
+              alt=""
+            />{" "}
+            <div className={styles.icons}>
+              <span>
+                <CiSearch />
+                <p className={styles.tooltip}>مشاهده سریع</p>
+              </span>
+              <div
+                onClick={async (e) => {
+                  e.preventDefault();
+                  const exist = wishlists.some(
+                    (product) => product._id === _id
+                  );
+                  if (!exist) {
+                    await addToWishlist({ _id, title, price, score, img });
                     swal({
                       icon: "success",
                       timer: 1500,
@@ -66,64 +69,64 @@ const ProductCard = ({ _id, title, price, score, img }) => {
                       showConfirmButton: false,
                       buttons: [""],
                     });
-                } else {
-                  swal({
-                    icon: "success",
-                    timer: 1500,
-                    text: "محصول از علاقه‌مندی های شما حذف شد",
-                    showConfirmButton: false,
-                    buttons: [""],
-                  });
-                  removeFromWishlist(_id);
-                }
+                  } else {
+                    swal({
+                      icon: "success",
+                      timer: 1500,
+                      text: "محصول از علاقه‌مندی های شما حذف شد",
+                      showConfirmButton: false,
+                      buttons: [""],
+                    });
+                    removeFromWishlist(_id);
+                  }
+                }}
+              >
+                {wishlists.some((product) => product._id === _id) ? (
+                  <FaHeart size={24} color="#f66" />
+                ) : (
+                  <CiHeart />
+                )}
+                <p className={styles.tooltip}>افزودن به علاقه مندی ها </p>
+              </div>
+            </div>
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                e.preventDefault();
+                addItemToCart(cartItem);
+                swal({
+                  icon: "success",
+                  text: "محصول با موفقیت به سبد خرید اضافه شد",
+                  timer: 1500,
+                  buttons: [""],
+                });
               }}
             >
-              {wishlists.some((product) => product._id === _id) ? (
-                <FaHeart size={24} color="#f66" />
-              ) : (
-                <CiHeart />
-              )}
-              <p className={styles.tooltip}>افزودن به علاقه مندی ها </p>
-            </div>
+              افزودن به سبد خرید
+            </button>
           </div>
-          <button
-            onClick={(e) => {
-              e.stopPropagation();
-              e.preventDefault();
-              addItemToCart(cartItem);
-              swal({
-                icon: "success",
-                text: "محصول با موفقیت به سبد خرید اضافه شد",
-                timer: 1500,
-                buttons: [""],
-              });
-            }}
-          >
-            افزودن به سبد خرید
-          </button>
-        </div>
 
-        <div className={styles.details}>
-          <span>{title}</span>
-          <div>
-            {Array(validScore)
-              .fill(0)
-              .map((i, id) => (
-                <FaStar key={id} />
-              ))}
-            {Array(5 - validScore)
-              .fill(0)
-              .map((i, id) => (
-                <FaRegStar key={id} />
-              ))}
+          <div className={styles.details}>
+            <span>{title}</span>
+            <div>
+              {Array(validScore)
+                .fill(0)
+                .map((i, id) => (
+                  <FaStar key={id} />
+                ))}
+              {Array(5 - validScore)
+                .fill(0)
+                .map((i, id) => (
+                  <FaRegStar key={id} />
+                ))}
+            </div>
+            <span>
+              {price === 0 ? "رایگان" : price?.toLocaleString() + "تومان"}{" "}
+            </span>
           </div>
-          <span>
-            {price === 0 ? "رایگان" : price?.toLocaleString() + "تومان"}{" "}
-          </span>
         </div>
-      </div>
-    </Link>
-  );
+      </Link>
+    );
 };
 
 export default ProductCard;

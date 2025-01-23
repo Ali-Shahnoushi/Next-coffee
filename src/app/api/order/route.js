@@ -154,3 +154,113 @@ export async function POST(req) {
     return Response.json({ error: error }, { status: 500 });
   }
 }
+
+export async function GET() {
+  try {
+    connectToDB();
+
+    const now = new Date();
+    const lastMonthStart = new Date(now.getFullYear(), now.getMonth() - 1, 1);
+    const lastMonthEnd = new Date(now.getFullYear(), now.getMonth(), 1);
+    const lastYearStart = new Date(now.getFullYear(), 0, 1);
+    const lastYearEnd = new Date(now.getFullYear() + 1, 0, 1);
+    const currentMonthStart = new Date(now.getFullYear(), now.getMonth(), 1);
+
+    // Persian month names mapping
+    const persianMonths = [
+      "فروردین", // 1
+      "اردیبهشت", // 2
+      "خرداد", // 3
+      "تیر", // 4
+      "مرداد", // 5
+      "شهریور", // 6
+      "مهر", // 7
+      "آبان", // 8
+      "آذر", // 9
+      "دی", // 10
+      "بهمن", // 11
+      "اسفند", // 12
+    ];
+
+    const monthlySales = await OrderModel.aggregate([
+      {
+        $match: {
+          updatedAt: { $gte: lastYearStart, $lt: lastYearEnd },
+        },
+      },
+      {
+        $group: {
+          _id: {
+            $month: "$updatedAt",
+          },
+          totalSales: { $sum: "$totalAmount" },
+        },
+      },
+    ]);
+
+    const salesMap = new Map();
+    monthlySales.forEach(({ _id, totalSales }) => {
+      salesMap.set(_id, totalSales);
+    });
+
+    const monthlySalesFormatted = persianMonths.map((monthName, index) => ({
+      date: monthName,
+      sale: salesMap.get(index + 1) || 0,
+    }));
+
+    const lastMonthSales = await OrderModel.aggregate([
+      {
+        $match: {
+          updatedAt: { $gte: lastMonthStart, $lt: lastMonthEnd }, // Filter for the last month
+        },
+      },
+      {
+        $group: {
+          _id: null, // Group all documents into one
+          totalSales: { $sum: "$totalAmount" }, // Sum total sales for the last month
+        },
+      },
+    ]);
+
+    const currentMonthSales = await OrderModel.aggregate([
+      {
+        $match: {
+          updatedAt: { $gte: currentMonthStart, $lt: now }, // Filter for the current month
+        },
+      },
+      {
+        $group: {
+          _id: null, // Group all documents into one
+          totalSales: { $sum: "$totalAmount" }, // Sum total sales for the current month
+        },
+      },
+    ]);
+
+    const lastMonthName = persianMonths[(now.getMonth() - 1 + 12) % 12]; // Handle January (month 0)
+    const currentMonthName = persianMonths[now.getMonth()];
+
+    // 4. Format the result as [{ date: "month", sale: 5920000 }, { date: "month", sale: 7920000 }]
+    const lastAndCurrentMonthSalesFormatted = [
+      {
+        date: lastMonthName,
+        sale: lastMonthSales[0]?.totalSales || 0, // Use optional chaining in case there are no sales
+      },
+      {
+        date: currentMonthName,
+        sale: currentMonthSales[0]?.totalSales || 0,
+      },
+    ];
+
+    return Response.json(
+      {
+        message: "get sells report successfuly.",
+        monthlySalesFormatted,
+        lastAndCurrentMonthSales: lastAndCurrentMonthSalesFormatted,
+      },
+      { status: 201 }
+    );
+  } catch (error) {
+    console.log(error);
+    return Response.json({ error: error }, { status: 500 });
+  }
+}
